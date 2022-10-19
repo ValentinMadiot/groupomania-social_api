@@ -1,0 +1,41 @@
+:root {
+  --colorPrimary: #fd2d01;
+  --colorSecondary: #ffd7d7;
+  --colorTertiary: #4e5166;
+  --colorLight: #ececed;
+  --colorLight2: #b0c4de;
+  --colorDark: #191970;
+  --shadow: 0px 4px 17px 2px rgba(0, 0, 0, 0.25);
+}
+
+html {
+  background-color: var(--colorLight2);
+  /* width: 100%; */
+  /* height: auto; */
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: var(--colorLight);
+}
+
+a {
+  color: inherit;
+}
+
+/* *,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0; */
+	/* box-sizing: border-box; */
+   /* border: 1px solid red; */
+   /* caret-color: transparent;
+} */
+
+/* 
+body {
+  max-width: 1700px;
+  margin: auto;
+} */

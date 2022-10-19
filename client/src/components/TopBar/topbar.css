@@ -1,0 +1,22 @@
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--colorTertiary);
+  color: white;
+}
+
+.topBarLogo {
+  width: 10rem;
+  cursor: pointer;
+}
+
+.topBarLogout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  font-weight: 700;
+  cursor: pointer;
+}

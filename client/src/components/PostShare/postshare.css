@@ -1,0 +1,97 @@
+.postShare {
+  background: var(--colorLight);
+  padding: 1rem;
+  margin: 1rem 20%;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.postShare > form > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postShare > form > div > input {
+  width: 90%;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 17px;
+  border: none;
+  outline: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.postShareButton {
+  padding-left: 1rem;
+  cursor: pointer;
+}
+
+.postShareOptions {
+  width: 100%;
+  margin: 0 1rem 0 1rem;
+  justify-content: start !important;
+  padding-top: 1rem;
+}
+
+.postShareOptions > div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.postShareOption {
+  display: none;
+  /* padding-top: 1rem;
+  cursor: pointer; 
+  display: flex;
+  align-items: center;
+  padding: 5px 10px 5px 10px;
+  font-size: 14px; */
+}
+
+.uploaded-image {
+  margin-top: 1rem;
+  width: 100%;
+  /* border-radius: 10px; */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploaded-image img {
+  max-height: 50vh;
+  width: auto;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.close-icon {
+  position: absolute;
+  top: 1%;
+  background-color: var(--primary-500);
+  height: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+input.error {
+  border: 1px solid #e7195a;
+}
+
+@media screen and (max-width: 990px) {
+  .postShare {
+    margin: 2rem 10%;
+  }
+  .postShareOptions {
+    margin-left: 2%;
+  }
+}
+

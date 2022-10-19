@@ -1,0 +1,5 @@
+.home {
+  /* width: 100%; */
+  min-width: 280px;
+  background-color: var(--colorLight2);
+}

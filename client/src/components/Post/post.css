@@ -1,0 +1,83 @@
+.post {
+  background: var(--colorLight);
+  padding: 1rem;
+  margin: 2rem 20%;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.postProfil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.postProfil > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.postProfilImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postProfilName {
+  font-weight: bold;
+}
+
+.postProfilDate {
+  font-size: 0.8rem;
+}
+
+.postProfilOption {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.postProfilDesc {
+  padding-top: 1rem;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.postImg {
+  align-self: center;
+  /* justify-content: center;
+  align-items: center;  */
+  max-width: 100%;
+  padding: 1rem 0;
+  max-height: 70vh;
+}
+
+.postLike  {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 300;
+  cursor: pointer;
+  gap: 0.3rem;
+  width: max-content;
+}
+
+.ico {
+  cursor: pointer;
+}
+@media screen and (max-width: 990px) {
+  .post {
+    margin: 2rem 10%;
+  }
+  .postImg {
+    align-self: center;
+    max-width: 100%;
+    padding: 1rem 0;
+    max-height: 70vh;
+  }
+}
