@@ -1,10 +1,21 @@
 .topBar {
+  background-color: var(--colorTertiary);
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+.topBar div {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
   background-color: var(--colorTertiary);
   color: white;
+  max-width: 100%;
+  max-width: 1700px;
+  margin: auto;
 }
 
 .topBarLogo {

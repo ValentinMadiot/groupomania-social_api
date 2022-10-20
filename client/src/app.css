@@ -22,11 +22,6 @@ html {
   background-color: var(--colorLight2);
 }
 
-body {
-  max-width: 1700px;
-  margin: auto;
-}
-
 button {
   padding: 0;
   border: none;
