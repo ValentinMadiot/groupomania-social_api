@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/logos/logo-black.svg";
 import { useSignup } from "../../hooks/useSignup";
-import "./signup.css";
 
-const Signup = (props) => {
+const Signup = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -24,18 +22,10 @@ const Signup = (props) => {
   const { signup, error, isLoading } = useSignup();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (password !== confPassword) {
-    //   return alert('Les mots de passe ne correspondent pas')
-    // }
-    // console.log("Signup", email, password, firstname, lastname);
     await signup(email, password, firstname, lastname);
   };
+
   return (
-    <section className="auth">
-      <div className="authLogo">
-        <img src={Logo} alt="" />
-        <h2>Faites rager vos collègues avec vos photos de vacances</h2>
-      </div>
       <div>
         <form className="authForm" onSubmit={handleSubmit}>
           <h3>Inscription</h3>
@@ -101,7 +91,6 @@ const Signup = (props) => {
           </div>
         </form>
       </div>
-    </section>
   );
 };
 

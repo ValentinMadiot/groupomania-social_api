@@ -1,7 +1,8 @@
 .postUpdate {
   background: var(--colorLight);
   padding: 2rem;
-  width: 50%;
+  width: 65%;
+  max-width: 1700px;
   border-radius: 1rem;
   position: absolute;
   top: 50%;
@@ -34,8 +35,7 @@
 
 .postUpdateOptions {
   width: 100%;
-  margin: 0 1rem 0 1rem;
-  padding-top: 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .postUpdateOptions > label > div {
@@ -89,12 +89,15 @@ input.error {
   border: 1px solid #e7195a;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 990px) {
   .postUpdate {
-  padding: 1rem;
-    width: 80%;
+    padding: 1rem;
+    width: 90%;
   }
-  .postUpdateOptions {
-    margin-left: 2%;
+}
+
+@media screen and (max-width: 600px) {
+  .uploaded-image-update img {
+    max-height: 30vh;
   }
 }

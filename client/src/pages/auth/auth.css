@@ -3,11 +3,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  min-width: 280px;
   gap: 7%;
 }
 
 .authLogo > img {
-  height: 4rem;
+  height: 5rem;
   padding-bottom: 1rem;
 }
 
@@ -47,9 +48,6 @@
   border-radius: 8px;
   padding: 17px;
   width: 90%;
-  /* flex: 1; */
-  /* display: grid;
-  grid-area: content; */
 }
 
 .authFormButton {
@@ -60,7 +58,6 @@
   background-color: var(--colorTertiary);
   color: white;
   font-weight: bold;
-  /* align-self: flex-end; */
 }
 
 .authFormButton:hover {
@@ -96,13 +93,12 @@
   }
 
   .authLogo > img {
-    height: 2rem;
+    height: 3.5rem;
     width: min-content;
   }
 
   .authForm {
     gap: 1rem;
-    /* margin-bottom: 1rem; */
   }
 
   .authFormInput {

@@ -107,7 +107,7 @@ const Post = ({ post }) => {
                   : ""}
               </span>
               <p className="postProfilDate">
-                {format(new Date(post?.createdAt), "dd/MM/yyyy", {
+                {format(new Date(post?.createdAt), "dd/MM/yyyy 'à' H:mm", {
                   addSuffix: false,
                 })}
               </p>
