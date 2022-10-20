@@ -1,70 +1,119 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Groupomania
 
-## Available Scripts
+Septième et dernier projet du parcours "Développeur web" chez OpenClassrooms. L'objectif est de construire un réseau social.
 
-In the project directory, you can run:
+- [Créez un réseau social d’entreprise](./docs/groupomania_mission.pdf)
 
-### `npm start`
+- [Cahier des charges](./docs/groupomania_cahier-des-charges.pdf)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<!-- - [Aspect visuel du site](./docs/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![screenshot du site](./docs/) -->
 
-### `npm test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Lancement
 
-### `npm run build`
+## API - Backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Prérequis  : `Node.js` et `Npm` installés sur votre ordinateur
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 1 : Installation : Depuis le dossier **api**, écrivez `npm init` dans votre terminal afin d'installer les dépendances. N'oubliez pas de renommer le fichier **.env.sample** en **.env** et de remplir les variables grâce à la note **.txt** des livrables.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+- 2 : Lancement : Une fois les dépendances installées, toujours depuis le dossier **api**, lancez le script `npm start` dans votre terminal. Votre terminal devrait indiquer que le serveur est lancé sur le port 4200 (par défaut).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Client - Frontend
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-  1 : Installation : Depuis le dossier **client**, écrivez `npm init` dans votre terminal afin d'installer les dépendances. N'oubliez pas de renommer le fichier **.env.sample** en **.env** et de remplir les variables grâce à la note **.txt** des livrables. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 2 : Lancement : Une fois les dépendances installées, toujours depuis le dossier **client**, lancez le script `npm start` dans votre terminal. L'application devrait se lancer sur [localhost port 3000](http://localhost:3000/) (par défaut). 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<br>
 
-## Learn More
+# Compétences évaluées
+- Réaliser un premier projet MERN stack complet
+- Authentifier un utilisateur et maintenir sa session (React context, JWT)
+- Implémenter un stockage de données sécurisé en utilisant une base de données (MongoDB)
+- Développer l’interface d’un site web grâce à un framework front-end (React)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Technologies
+- MongoDB (Mongoose)
+- Express (Application)
+- React (front-end library/framework)
+- Node.js
 
-### Code Splitting
+## API 
+Bcrypt, Dotenv, Express, Helmet, Jsonwebtoken, Mongoose-unique-validator, Multer, Password-validator, Validator 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## CLIENT 
+Bcrypt, Dotenv, Express, Helmet, Jsonwebtoken, Mongoose-unique-validator, Multer, Password-validator, Validator 
 
-### Analyzing the Bundle Size
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+# Scénario
+Vous êtes développeur depuis plus d'un an chez CONNECT-E, une petite agence web
+regroupant une douzaine d'employés.
+Votre directrice, Stéphanie, vient de signer un nouveau contrat avec Groupomania, un groupe
+spécialisé dans la grande distribution, et l'un des plus Kdèles clients de l'agence.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Le projet consiste à construire un réseau social interne pour les employés de Groupomania. Le
+but de cet outil est de faciliter les interactions entre collègues. Le département RH de
+Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges entre collègues. 
 
-### Advanced Configuration
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Cahier des charges
 
-### Deployment
+## Identité Graphique
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Police d’écriture : tous les textes du site doivent utiliser la police Lato
+- Couleurs : vous êtes libre sur les couleurs
 
-### `npm run build` fails to minify
+## Technique
+- Respecter les standards WCAG.
+- Mise en place backend / frontend / database.
+- Le projet doit être codé en JavaScript.
+- Obligation d'utiliser un framework front-end (au choix).
+- Choix de la base de données libre (MongoDB, mySQL...).
+- Fournir un README expliquant installation/lancement du projet.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Spécifications fonctionnelles
+
+### Page de connexion
+- Une page de connexion permettant à l’utilisateur de se connecter, ou bien de créer un compte s’il n’en possède pas.
+- La connexion doit se faire à partir de deux éléments : le mail et un mot de passe. 
+- Rien de plus à prévoir pour le moment.
+
+
+### Détails de la fonctionnalité de connexion
+- Un utilisateur doit avoir la possibilité de se déconnecter.
+- La session de l’utilisateur persiste pendant qu’il est connecté.
+-  Les données de connexion doivent être sécurisées.
+
+
+### Page d’accueil
+- La page d’accueil doit lister les posts créés par les différents utilisateurs.
+- On voudra que les posts soient listés de façon antéchronologique (du plus récent au plus ancien).
+
+
+### Création d’un post
+- Un utilisateur doit pouvoir créer un post.
+- Un post doit pouvoir contenir du texte et une image.
+- Un utilisateur doit aussi pouvoir modifier et supprimer ses posts.
+
+
+### Système de like
+- Un utilisateur doit pouvoir liker un post, une seule fois pour chaque post.
+
+
+### Rôle administrateur
+- Dans le but de pouvoir faire de la modération si nécessaire, il faudra créer un utilisateur “administrateur” ; 
+- Celui-ci aura les droits de modification /
+suppression sur tous les posts du réseau social. 
+- Il faudra donc nous communiquer les identifiants de cet administrateur.
