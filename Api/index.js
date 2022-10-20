@@ -1,6 +1,6 @@
 //* IMPORT
 const express = require("express");
-// const helmet = require("helmet");
+const helmet = require("helmet");
 require("dotenv").config();
 require("./services/database");
 const multer = require("multer");
@@ -18,7 +18,7 @@ const app = express();
 const port = process.env.PORT || 4200;
 
 //* HELMET => PROTEGE L'APPLICATION DE CERTAINES VULNERABILITES EN CONFIGURANT DE MANIERE APPROPRIEES DES HEADERS HTTP
-// app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
+app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
 
 //* PARAMETRAGE DES HEADERS HTTP
 app.use(cors());
@@ -26,13 +26,9 @@ app.use(cors());
 //* PARSER =>  ANALYSE LE CORPS D'UNE REQUETE HTTP, ASSEMBLE LES DONNEES, CREE UN OBJET BODY EXPLOITABLE
 app.use(express.json());
 
-//? Serve images
+//* SAVE IMAGES LOCAL
 app.use(express.static("public"));
 app.use("/images", express.static("images"));
-// app.use(
-//   "/public/images",
-//   express.static(path.join(__dirname, "public/images"))
-// );
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -48,7 +44,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
     return res.status(200).json("File uploaded successfully");
   } catch (error) {
-    console.log({ message: error.message });
+    console.log({ error: error.message });
   }
 });
 

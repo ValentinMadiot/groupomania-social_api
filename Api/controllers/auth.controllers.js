@@ -1,9 +1,9 @@
-//* IMPORT
+//! IMPORT
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.models");
 
-//* CONTROLLER UTILISATEUR
+//! CONTROLLER USERS
 
 //* SIGNUP
 const signup = async (req, res) => {
@@ -13,12 +13,10 @@ const signup = async (req, res) => {
 
   try {
     let user = await User.findOne({ email: req.body.email });
-
     if (user) {
       return res.status(400).json({ error: "Email déjà utilisé" });
     }
     user = await User.create({ ...req.body });
-
     res.status(200).json({ user });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -32,20 +30,16 @@ const login = async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ error: "Tous les champs doivent être remplis" });
   }
-
   try {
     const user = await User.findOne({
       email: email,
     });
-
     if (user) {
       const validpass = await bcrypt.compare(password, user.password);
-
       if (!validpass) {
         res.status(400).json({error : "Mot de passe incorrect"});
       } else {
-        const token = jwt.sign(
-          {
+        const token = jwt.sign({
             mail: user.email,
             id: user._id,
           },

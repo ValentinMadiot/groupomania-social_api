@@ -1,10 +1,10 @@
-//* IMPORTS
+//! IMPORTS
 const Post = require("../models/Post.models");
 const mongoose = require("mongoose");
 const fs = require("fs");
 const { unlink } = require("fs");
 
-//* CONTROLLERS POSTS :
+//! CONTROLLERS POSTS
 
 //* CREATE
 const createPost = async (req, res) => {
@@ -12,7 +12,6 @@ const createPost = async (req, res) => {
   const newPost = new Post({
     ...reqPost,
   });
-
   try {
     await newPost.save();
     res.status(200).json(newPost);
@@ -33,7 +32,7 @@ const getAllPosts = async (req, res) => {
         })
     );
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -44,7 +43,7 @@ const getOnePost = async (req, res) => {
     const post = await Post.findById(postId);
     res.status(200).json(post);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -59,14 +58,13 @@ const modifyPost = async (req, res) => {
         const filename = post.image.split("public/images/")[0];
         fs.unlink(`public/images/${filename}`, () => {});
       }
-
       await post.updateOne({ $set: req.body });
       res.status(200).json(req.body);
     } else {
-      res.status(403).json("You can only update your own posts !");
+      res.status(403).json({error : "Vous ne pouvez mettre à jour que vos propres messages !"});
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -76,7 +74,6 @@ const deletePost = async (req, res) => {
   const { userId, admin } = req.body;
   try {
     const post = await Post.findById(postId);
-
     if (admin || post.userId === userId) {
       if (post.image) {
         const filename = post.image.split("public/images/")[0];
@@ -87,10 +84,10 @@ const deletePost = async (req, res) => {
       post.deleteOne();
       res.status(200).json(post);
     } else {
-      res.status(403).json("You can only delete your own posts !");
+      res.status(403).json({error : "Vous ne pouvez mettre à jour que vos propres messages !"});
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -108,16 +105,9 @@ const likePost = async (req, res) => {
       res.status(200).json("Post disliked !");
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //* EXPORTER LES FONCTIONS "...Post"
-module.exports = {
-  createPost,
-  getAllPosts,
-  getOnePost,
-  modifyPost,
-  deletePost,
-  likePost,
-};
+module.exports = { createPost, getAllPosts, getOnePost, modifyPost, deletePost, likePost };

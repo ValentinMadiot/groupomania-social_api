@@ -97,7 +97,7 @@ const Post = ({ post }) => {
       <div>
         <div className="postProfil">
           <div>
-          <img src={userRegular} alt="profil default" className="postProfilImg"/>
+          <img src={userDefault} alt="profil default" className="postProfilImg"/>
             <div>
               <span className="postProfilName">
                 {user.firstname === user.lastname

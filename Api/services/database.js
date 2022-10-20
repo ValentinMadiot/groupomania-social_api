@@ -7,8 +7,8 @@ mongoose
   .then(() => {
     console.log("Connexion à MongoDB réussie ! ");
   })
-  .catch((err) => {
-    console.error("Connexion à MongoDB échouée ! " + err);
+  .catch((error) => {
+    console.error("Connexion à MongoDB échouée ! " + error);
   });
 
 //* EXPORT
