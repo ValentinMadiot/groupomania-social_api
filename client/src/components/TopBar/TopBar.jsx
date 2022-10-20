@@ -2,12 +2,11 @@ import { Link } from "react-router-dom";
 import { useLogout } from "../../hooks/useLogout";
 
 import Logo from "../../assets/logos/logo-white.svg";
-import { UilSignOutAlt } from "@iconscout/react-unicons";
+import { signOut } from "../../assets/icons";
 import "./topbar.css";
 
 const TopBar = () => {
   const { logout } = useLogout();
-
   const handleClick = () => {
     logout();
   };
@@ -18,7 +17,7 @@ const TopBar = () => {
         <img className="topBarLogo" src={Logo} alt="logo Groupomania" />
       </Link>
       <Link to="/login">
-        <UilSignOutAlt className="topBarLogout" onClick={handleClick}/>
+        <img className="topBarLogout" src={signOut} alt="Déconnexion" onClick={handleClick}/>
       </Link>
     </header>
   );

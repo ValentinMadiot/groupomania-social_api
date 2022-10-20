@@ -2,7 +2,7 @@ import { React, useRef, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
 
-import { UilScenery, UilShare, UilTimesCircle } from "@iconscout/react-unicons";
+import { share, image, crossRemove } from "../../assets/icons";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 // import { Modal, useMantineTheme } from "@mantine/core";
@@ -104,14 +104,14 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
               value={updatePost.desc}
             />
             <button type="submit" aria-label="submit">
-              <UilShare className="postUpdateButton" />
+            <img src={share} alt="partage" className="postShareButton"/>
             </button>
           </div>
 
           <div className="postUpdateOptions">
             <label htmlFor={"image"} aria-label="select file">
               <div onClick={() => imageRef.current.click()}>
-                <UilScenery alt="select file" />
+              <img src={image} alt="select file" />
                 Selectionner une image
               </div>
             </label>
@@ -127,7 +127,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             <div className="uploaded-image-update">
               <img src={URL.createObjectURL(file)} alt="profile_image" />
               <div className="close-icon" onClick={() => setFile(null)}>
-                {<UilTimesCircle alt="remove" />}
+              {<img src={crossRemove} alt="remove" />}
               </div>
             </div>
           )}

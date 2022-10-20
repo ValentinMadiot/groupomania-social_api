@@ -86,6 +86,11 @@ input.error {
   border: 1px solid #e7195a;
 }
 
+.error{
+  padding-top: 1rem;
+  color: red;
+}
+
 @media screen and (max-width: 990px) {
   .postShare {
     margin: 2rem 10%;

@@ -3,12 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
 
-import {
-  UilEdit,
-  UilHeart,
-  UilTrash,
-  UilUserCircle,
-} from "@iconscout/react-unicons";
+import { userDefault, userRegular, edit, trash, likeEmpty, likeIcon } from "../../assets/icons";
 import PostUpdateModal from "../PostUpdate/PostUpdate";
 import "./post.css";
 
@@ -92,10 +87,8 @@ const Post = ({ post }) => {
 
   //* UPDATE
   const handleUpdate = () => {
-    if (auth.user.admin || auth.user._id === post.userId) {
-      // CHANGER PLACE
-      setUpdatePostModal(true);
-    }
+    // CHANGER PLACE
+    setUpdatePostModal(true);
   };
 
   // const [menuOpened, setMenuOpened] = useState(false);
@@ -104,9 +97,7 @@ const Post = ({ post }) => {
       <div>
         <div className="postProfil">
           <div>
-            <i className="postProfilImg">
-              <UilUserCircle />
-            </i>
+          <img src={userRegular} alt="profil default" className="postProfilImg"/>
             <div>
               <span className="postProfilName">
                 {user.firstname === user.lastname
@@ -123,25 +114,25 @@ const Post = ({ post }) => {
             </div>
           </div>
           <div>
-            <span onClick={handleUpdate} className="ico">
-              <UilEdit />
-            </span>
-              <PostUpdateModal
-                updatePostModal={updatePostModal}
-                setUpdatePostModal={setUpdatePostModal}
-                data={post}
-              />
+            {auth.user.admin || auth.user._id === post.userId ? (
+          <img src={edit} alt="edit" onClick={handleUpdate}/>
 
-            <span
-              onClick={handleDelete} className="ico"
-              // className="postProfilOption"
-              // onClick={() => setMenuOpened(true)}>
-              // <OptionPost menuOpened={menuOpened} setMenuOpened={setMenuOpened} /
-            >
-              <UilTrash />
-            </span>
+            ) : null}
+
+            <PostUpdateModal
+              updatePostModal={updatePostModal}
+              setUpdatePostModal={setUpdatePostModal}
+              data={post}
+            />
+
+            {auth.user.admin || auth.user._id === post.userId ? (
+              <img src={trash} alt="delete"  onClick={handleDelete}/>
+            ) : null}
+
+            {/* // className="postProfilOption" */}
+            {/* // onClick={() => setMenuOpened(true)}> */}
+            {/* // <OptionPost menuOpened={menuOpened} setMenuOpened={setMenuOpened} / */}
           </div>
-          {/* {error && <div className="error">{error}</div>} */}
         </div>
       </div>
       <div className="postContainer">
@@ -152,12 +143,14 @@ const Post = ({ post }) => {
           src={post.image ? PF + post.image : null}
         />
       </div>
-      
-        <div onClick={handleLike} className="postLike">
-          <UilHeart color="#E40000"/>
-          {like} likes
-        </div>
-     
+      <div onClick={handleLike} className="postLike">
+        <img
+          src={liked ? likeIcon : likeEmpty }
+          alt="like"
+          title="Aimer ce message"
+        />
+        {like} likes
+      </div>
     </section>
   );
 };

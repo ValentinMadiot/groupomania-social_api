@@ -24,6 +24,9 @@ const Signup = (props) => {
   const { signup, error, isLoading } = useSignup();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // if (password !== confPassword) {
+    //   return alert('Les mots de passe ne correspondent pas')
+    // }
     // console.log("Signup", email, password, firstname, lastname);
     await signup(email, password, firstname, lastname);
   };
@@ -83,12 +86,13 @@ const Signup = (props) => {
               type="password"
               onChange={(e) => setConfPassword(e.target.value)} // onChange={inputHandler}
               value={confPassword} // value={inputFiel.password}
+            // pattern={password}
             />
           </div>
+          {error && <div className="error">{error}</div>}
           <button disabled={isLoading} className="button authFormButton">
             Inscription
           </button>
-          {error && <div className="error">{error}</div>}
           <div>
             <button className="authFormText">
               {/* onClick={() => props.onFormSwitch("login")} */}

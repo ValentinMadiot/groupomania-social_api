@@ -83,6 +83,10 @@
   color: var(--colorTertiary);
 }
 
+.errorLogin {
+  color: red;
+}
+
 @media screen and (max-width: 990px) {
   .auth {
     display: grid;

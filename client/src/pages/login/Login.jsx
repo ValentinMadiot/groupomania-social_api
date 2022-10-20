@@ -8,18 +8,21 @@ import "../signup/signup.css";
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, error, isLoading } = useLogin();
-  let navigate = useNavigate();
+  const { login, isLoading, error, setError } = useLogin();
+  console.log("setError",setError);
+  console.log("error",error);
+  // let navigate = useNavigate();
   // const { user } = useAuthContext();
-  // console.log("TAMERELAPUTE", user.email);
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     console.log(email, pass);
-  //   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(email, password);
-    // if (isLoading) {
+
+    // if (!login) {
+    //   setError("Votre email ou mot de passe est incorrect");
+    //   return;
+    // }
+    // // if (isLoading) {
     // navigate("/");
     // } else;
     // return;
@@ -34,7 +37,6 @@ const Login = (props) => {
       <div>
         <form className="authForm" onSubmit={handleSubmit}>
           <h3>Connexion</h3>
-          {/* <span>{user.email}</span> */}
           <input
             aria-label="Adresse e-mail"
             placeholder="Adresse e-mail"
@@ -54,11 +56,11 @@ const Login = (props) => {
             value={password}
           />
           {/* <Link to="/"> */}
-          <button disabled={isLoading} className="button authFormButton">
+          {error && <div className="errorLogin">{error}</div>}
+          <button disabled={isLoading} className="button authFormButton" type="submit">
             {/* type="submit" */}
             Connexion
           </button>
-          {error && <div className="error">{error}</div>}
           <div>
             <button
               className="authFormText"

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
 
-import { UilScenery, UilShare, UilTimesCircle } from "@iconscout/react-unicons";
+import { share, image, crossRemove } from "../../assets/icons";
 import "./postshare.css";
 
 const PostShare = () => {
@@ -88,14 +88,14 @@ const PostShare = () => {
             aria-label="Partage tes expériences ici"
           />
           <button type="submit" aria-label="submit">
-            <UilShare className="postShareButton" />
+            <img src={share} alt="partage" className="postShareButton"/>
           </button>
         </div>
         {error && <div className="error">{error}</div>}
 
         <div className="postShareOptions">
           <div onClick={() => imageRef.current.click()}>
-            <UilScenery alt="select file" /> Ajouter une image
+            <img src={image} alt="select file" /> Ajouter une image
           </div>
           <input
             className="postShareOption"
@@ -110,7 +110,7 @@ const PostShare = () => {
           <div className="uploaded-image">
             <img src={URL.createObjectURL(file)} />
             <div className="close-icon" onClick={() => setFile(null)}>
-              {<UilTimesCircle alt="remove" />}
+              {<img src={crossRemove} alt="remove" />}
             </div>
           </div>
         )}
