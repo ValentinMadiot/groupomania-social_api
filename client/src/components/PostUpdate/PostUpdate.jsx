@@ -1,29 +1,22 @@
-import { React, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
 
 import { share, image, crossRemove } from "../../assets/icons";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-// import { Modal, useMantineTheme } from "@mantine/core";
 import "../PostUpdate/postupdate.css";
 
 function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
-  // const theme = useMantineTheme();
   const { user: auth } = useAuthContext();
   const { dispatch } = usePostsContext();
 
-  // const [desc, setDesc] = useState("");
-  // const [error, setError] = useState(null);
-  // const [emptyFields, setEmptyFiedls] = useState([]);
-
   const [updatePost, setUpdatePost] = useState(data);
-
   const handleDetails = (e) => {
     setUpdatePost({ ...updatePost, [e.target.name]: e.target.value });
   };
 
-  //* Image
+  //* IMAGE
   const imageRef = useRef();
   const [file, setFile] = useState(null);
   const onImageChange = (event) => {
@@ -68,10 +61,9 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           },
         });
         const json = await response.json();
-        console.log("response", json);
-        dispatch({ type: "UPDATE_POST", payload: json });
         setUpdatePostModal(false);
         setFile(null);
+        dispatch({ type: "UPDATE_POST", payload: json });
         // window.location.reload();
       } catch (error) {
         console.log({ message: error.message });
@@ -85,14 +77,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
 
   return (
     <Modal
-      // overlayColor={theme.colors.gray[5]}
-      // overlayOpacity={0.55}
-      // overlayBlur={3}
-      // size="40rem"
-      // opened={updatePostModal}
-      // onClose={handleClose}>
-
-      open={updatePostModal} // NEW MODAL
+      open={updatePostModal}
       onClose={handleClose}>
       <Box className="postUpdate">
         <form onSubmit={handleSubmit}>
@@ -103,15 +88,14 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
               onChange={handleDetails}
               value={updatePost.desc}
             />
-            <button type="submit" aria-label="submit">
-            <img src={share} alt="partage" className="postShareButton"/>
+            <button type="submit" aria-label="soumettre">
+              <img className="postShareButton" src={share} alt="Partager"/>
             </button>
           </div>
-
           <div className="postUpdateOptions">
-            <label htmlFor={"image"} aria-label="select file">
+            <label htmlFor={"image"} aria-label="Selectionner une image">
               <div onClick={() => imageRef.current.click()}>
-              <img src={image} alt="select file" />
+              <img src={image} alt="Selectionner une image" />
                 Selectionner une image
               </div>
             </label>
@@ -125,9 +109,9 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           </div>
           {file && (
             <div className="uploaded-image-update">
-              <img src={URL.createObjectURL(file)} alt="profile_image" />
+              <img src={URL.createObjectURL(file)} alt="Image du post"/>
               <div className="close-icon" onClick={() => setFile(null)}>
-              {<img src={crossRemove} alt="remove" />}
+                {<img src={crossRemove} alt="Supprimer l'image" />}
               </div>
             </div>
           )}

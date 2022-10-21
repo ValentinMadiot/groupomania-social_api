@@ -4,8 +4,8 @@ import { usePostsContext } from "../../hooks/usePostsContext";
 import Post from "../Post/Post";
 
 const Posts = () => {
-  const { posts, dispatch } = usePostsContext();
   const { user } = useAuthContext();
+  const { posts, dispatch } = usePostsContext();
 
   useEffect(() => {
     const fetchPosts = async () => {

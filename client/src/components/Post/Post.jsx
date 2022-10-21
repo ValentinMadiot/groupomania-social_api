@@ -1,9 +1,9 @@
-import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
+import { format } from "date-fns";
 
-import { userDefault, userRegular, edit, trash, likeEmpty, likeIcon } from "../../assets/icons";
+import { userDefault, edit, trash, likeEmpty, likeIcon } from "../../assets/icons";
 import PostUpdateModal from "../PostUpdate/PostUpdate";
 import "./post.css";
 
@@ -11,7 +11,6 @@ const Post = ({ post }) => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { dispatch } = usePostsContext();
   const { user: auth } = useAuthContext();
-  // const [error, setError] = useState(null);
   const [updatePostModal, setUpdatePostModal] = useState(false);
 
   //* DETAILS USER
@@ -87,55 +86,46 @@ const Post = ({ post }) => {
 
   //* UPDATE
   const handleUpdate = () => {
-    // CHANGER PLACE
     setUpdatePostModal(true);
   };
 
-  // const [menuOpened, setMenuOpened] = useState(false);
   return (
     <section className="post">
-      <div>
-        <div className="postProfil">
+      <div className="postProfil">
+        <div>
+          <img
+            className="postProfilImg"
+            src={userDefault}
+            alt="photo de profil par défaut"
+          />
           <div>
-          <img src={userDefault} alt="profil default" className="postProfilImg"/>
-            <div>
-              <span className="postProfilName">
-                {user.firstname === user.lastname
-                  ? user.firstname
-                  : "" || user.firstname || user.lastname
-                  ? user.firstname + " " + user.lastname
-                  : ""}
-              </span>
-              <p className="postProfilDate">
-                {format(new Date(post?.createdAt), "dd/MM/yyyy 'à' H:mm", {
-                  addSuffix: false,
-                })}
-              </p>
-            </div>
-          </div>
-          <div>
-            {auth.user.admin || auth.user._id === post.userId ? (
-          <img src={edit} alt="edit" onClick={handleUpdate}/>
-
-            ) : null}
-
-            <PostUpdateModal
-              updatePostModal={updatePostModal}
-              setUpdatePostModal={setUpdatePostModal}
-              data={post}
-            />
-
-            {auth.user.admin || auth.user._id === post.userId ? (
-              <img src={trash} alt="delete"  onClick={handleDelete}/>
-            ) : null}
-
-            {/* // className="postProfilOption" */}
-            {/* // onClick={() => setMenuOpened(true)}> */}
-            {/* // <OptionPost menuOpened={menuOpened} setMenuOpened={setMenuOpened} / */}
+            <span className="postProfilName">
+              {user.firstname === user.lastname ? user.firstname : "" || 
+              user.firstname || user.lastname ? user.firstname + " " + user.lastname : ""
+              }
+            </span>
+            <p className="postProfilDate">
+              {format(new Date(post?.createdAt), "dd/MM/yyyy 'à' H:mm", {
+                addSuffix: false,
+              })}
+            </p>
           </div>
         </div>
+        <div>
+          {auth.user.admin || auth.user._id === post.userId ? (
+            <img src={edit} alt="edit" onClick={handleUpdate} />
+          ) : null}
+          <PostUpdateModal
+            updatePostModal={updatePostModal}
+            setUpdatePostModal={setUpdatePostModal}
+            data={post}
+          />
+          {auth.user.admin || auth.user._id === post.userId ? (
+            <img src={trash} alt="delete" onClick={handleDelete} />
+          ) : null}
+        </div>
       </div>
-      <div className="postContainer">
+      <div className="postContents">
         <div className="postProfilDesc">{post.desc}</div>
         <img
           className="postImg"
@@ -145,7 +135,7 @@ const Post = ({ post }) => {
       </div>
       <div onClick={handleLike} className="postLike">
         <img
-          src={liked ? likeIcon : likeEmpty }
+          src={liked ? likeIcon : likeEmpty}
           alt="like"
           title="Aimer ce message"
         />
@@ -154,4 +144,5 @@ const Post = ({ post }) => {
     </section>
   );
 };
+
 export default Post;

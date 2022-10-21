@@ -43,15 +43,13 @@
   padding-top: 1rem;
 }
 
-.postContainer {
+.postContents {
   display: flex;
   flex-direction: column;
 }
 
 .postImg {
   align-self: center;
-  /* justify-content: center;
-  align-items: center;  */
   max-width: 100%;
   padding: 1rem 0;
   max-height: 70vh;
@@ -70,14 +68,9 @@
 .ico {
   cursor: pointer;
 }
+
 @media screen and (max-width: 990px) {
   .post {
     margin: 2rem 10%;
-  }
-  .postImg {
-    align-self: center;
-    max-width: 100%;
-    padding: 1rem 0;
-    max-height: 70vh;
   }
 }

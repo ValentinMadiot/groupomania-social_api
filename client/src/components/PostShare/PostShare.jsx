@@ -6,16 +6,15 @@ import { share, image, crossRemove } from "../../assets/icons";
 import "./postshare.css";
 
 const PostShare = () => {
-  const { dispatch } = usePostsContext();
   const { user: currentUser } = useAuthContext();
+  const { dispatch } = usePostsContext();
 
   const imageRef = useRef();
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
-  // const [emptyFields, setEmptyFiedls] = useState([]);
 
-  //* Image
+  //* IMAGE
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
@@ -30,6 +29,7 @@ const PostShare = () => {
       return;
     }
     if (desc === "" && file === null) {
+      setError("Vous devez ajouter une description et/ou une photo")
       return;
     }
     const post = {
@@ -66,12 +66,11 @@ const PostShare = () => {
       const json = await response.json();
       setDesc("");
       setFile(null);
-      // setEmptyFiedls([]);
+      setError(null)
       dispatch({ type: "CREATE_POST", payload: json });
       // window.location.reload();
     } catch (error) {
       console.log({ message: error.message });
-      // setEmptyFiedls(json.emptyFields);
     }
   };
 
@@ -80,22 +79,20 @@ const PostShare = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <input
-            // className={emptyFields.includes("title") ? "error" : ""}
             type="text"
-            placeholder="Partage ta vie ici"
+            placeholder="Partage tes expériences ici"
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
             aria-label="Partage tes expériences ici"
           />
-          <button type="submit" aria-label="submit">
-            <img src={share} alt="partage" className="postShareButton"/>
+          <button type="submit" aria-label="Soumettre">
+            <img className="postShareButton" src={share} alt="Partager"/>
           </button>
         </div>
         {error && <div className="error">{error}</div>}
-
         <div className="postShareOptions">
           <div onClick={() => imageRef.current.click()}>
-            <img src={image} alt="select file" /> Ajouter une image
+            <img src={image} alt="Selectionner une image" />Ajouter une image
           </div>
           <input
             className="postShareOption"
@@ -103,14 +100,14 @@ const PostShare = () => {
             accept="image/png, image/jpeg, image/jpg, image/webp"
             ref={imageRef}
             onChange={onImageChange}
-            aria-label="select file"
+            aria-label="Selectionner une image"
           />
         </div>
         {file && (
           <div className="uploaded-image">
-            <img src={URL.createObjectURL(file)} />
+            <img src={URL.createObjectURL(file)} alt="Image du post"/>
             <div className="close-icon" onClick={() => setFile(null)}>
-              {<img src={crossRemove} alt="remove" />}
+              {<img src={crossRemove} alt="Supprimer l'image"/>}
             </div>
           </div>
         )}

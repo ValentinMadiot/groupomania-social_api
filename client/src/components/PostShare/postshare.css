@@ -43,28 +43,18 @@
 
 .postShareOption {
   display: none;
-  /* padding-top: 1rem;
-  cursor: pointer; 
-  display: flex;
-  align-items: center;
-  padding: 5px 10px 5px 10px;
-  font-size: 14px; */
 }
 
 .uploaded-image {
-  margin-top: 1rem;
-  width: 100%;
-  /* border-radius: 10px; */
-  overflow: hidden;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 1rem;
 }
 
 .uploaded-image img {
-  max-height: 50vh;
   width: auto;
+  max-height: 50vh;
   object-fit: cover;
   border-radius: 0.5rem;
 }
@@ -98,4 +88,3 @@ input.error {
     margin-left: 2%;
   }
 }
-

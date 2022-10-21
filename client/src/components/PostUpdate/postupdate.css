@@ -1,13 +1,13 @@
 .postUpdate {
-  background: var(--colorTertiary);
-  padding: 2rem;
-  width: 65%;
-  max-width: 1700px;
-  border-radius: 1rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 65%;
+  max-width: 1700px;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--colorTertiary);
   box-shadow: var(--shadow);
 }
 
@@ -18,7 +18,7 @@
 }
 
 .postUpdate > form > div > input {
-  width: 90%;
+  width: 95%;
   border-radius: 10px;
   padding: 10px;
   font-size: 17px;
@@ -47,28 +47,18 @@
 
 .postUpdateOption {
   display: none;
-  /* padding-top: 1rem !important; */
-  /* cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 5px 10px 5px 10px;
-  font-size: 14px; */
 }
 
 .uploaded-image-update {
-  margin-top: 1rem;
-  width: 100%;
-  /* border-radius: 10px; */
-  overflow: hidden;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 1rem;
 }
 
 .uploaded-image-update img {
-  max-height: 50vh;
   width: auto;
+  max-height: 50vh;
   object-fit: cover;
   border-radius: 0.5rem;
 }
@@ -87,6 +77,11 @@
 
 input.error {
   border: 1px solid #e7195a;
+}
+
+.error{
+  padding-top: 1rem;
+  color: red;
 }
 
 @media screen and (max-width: 990px) {
