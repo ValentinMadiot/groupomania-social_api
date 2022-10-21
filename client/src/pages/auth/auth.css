@@ -44,7 +44,7 @@
 .authFormInput {
   border: none;
   outline: none;
-  background-color: var(--colorLight);
+  background-color: var(--colorTertiary);
   border-radius: 8px;
   padding: 17px;
   width: 90%;
@@ -55,15 +55,15 @@
   height: 3rem;
   border-radius: 10px;
   border: none;
-  background-color: var(--colorTertiary);
+  background-color: var(--colorPrimary);
   color: white;
   font-weight: bold;
 }
 
 .authFormButton:hover {
   background-color: white;
-  border: 2px solid var(--colorTertiary);
-  color: var(--colorTertiary);
+  border: 2px solid var(--colorPrimary);
+  color: var(--colorPrimary);
   font-weight: bold;
   cursor: pointer;
 }
@@ -77,7 +77,7 @@
 }
 
 .authFormText:hover {
-  color: var(--colorTertiary);
+  color: var(--colorPrimary);
 }
 
 .errorLogin {

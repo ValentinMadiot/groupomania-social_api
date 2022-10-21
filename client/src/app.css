@@ -1,12 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
 
 :root {
-  --colorPrimary: #fd2d01;
-  --colorSecondary: #ffd7d7;
-  --colorTertiary: #4e5166;
-  --colorLight: #ececed;
-  --colorLight2: #b0c4de;
-  --colorDark: #191970;
+  --colorPrimary: #4e5166;
+  --colorSecondary: #b0c4de;
+  --colorTertiary: #ececed;
   --shadow: 0px 4px 17px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -18,17 +15,17 @@
   padding: 0;
   box-sizing: border-box;
   caret-color: transparent;
-  /* border: 1px solid red;  */
+  /* border: 1px solid red;  TEST */
 }
 
 html {
-  background-color: var(--colorLight2);
+  background-color: var(--colorSecondary);
 }
 
 button {
   padding: 0;
   border: none;
-  background: var(--colorLight);
+  background: var(--colorTertiary);
 }
 
 a {
