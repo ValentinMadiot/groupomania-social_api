@@ -7,18 +7,7 @@ const Signup = () => {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confPassword, setConfPassword] = useState("");
-  // const [confirmpass, setConfirmpass] = useState("");
-  //   const [inputFiel, setInputField] = useState({
-  //     firstname: "",
-  //     lastname: "",
-  //     email: "",
-  //     password: "",
-  //   });
-  //   const inputHandler = (e) => {
-  //     setInputField({ [e.target.name]: e.target.value });
-  //   };
-  //     alert(inputFiel.firstname);
+
   const { signup, error, isLoading } = useSignup();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,71 +15,65 @@ const Signup = () => {
   };
 
   return (
-      <div>
-        <form className="authForm" onSubmit={handleSubmit}>
-          <h3>Inscription</h3>
-          <div className="grid">
-            <input
-              aria-label="Prénom"
-              placeholder="Prénom"
-              className="authFormInput"
-              name="firstname"
-              type="text"
-              onChange={(e) => setFirstname(e.target.value)} // onChange={inputHandler}
-              value={firstname} // value={inputFiel.firstname}
-            />
-            <input
-              aria-label="Nom"
-              placeholder="Nom"
-              className="authFormInput"
-              name="lastname"
-              type="text"
-              onChange={(e) => setLastname(e.target.value)} // onChange={inputHandler}
-              value={lastname} // value={inputFiel.lastname}
-            />
-          </div>
+    <div>
+      <form className="authForm signup" onSubmit={handleSubmit}>
+        <h3>Inscription</h3>
+        <div className="grid">
           <input
-            aria-label="Adresse e-mail"
-            placeholder="Adresse e-mail"
+            required
+            aria-label="Prénom"
+            placeholder="Prénom"
             className="authFormInput"
-            name="username"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)} // onChange={inputHandler}
-            value={email} // value={inputFiel.email}
+            name="firstname"
+            type="text"
+            onChange={(e) => setFirstname(e.target.value)}
+            value={firstname}
+            pattern="^(?![\s.]+$)[A-zÀ-ú\s\-]{1,25}$"
           />
-          <div className="grid">
-            <input
-              aria-label="Mot de passe"
-              placeholder="Mot de passe"
-              className="authFormInput"
-              name="password"
-              type="password"
-              onChange={(e) => setPassword(e.target.value)} // onChange={inputHandler}
-              value={password} // value={inputFiel.password}
-            />
-            <input
-              aria-label="Confirmation Mot de passe"
-              placeholder="Confirmation Mot de passe"
-              className="authFormInput"
-              name="confirmpassword"
-              type="password"
-              onChange={(e) => setConfPassword(e.target.value)} // onChange={inputHandler}
-              value={confPassword} // value={inputFiel.password}
-            // pattern={password}
-            />
-          </div>
-          {error && <div className="error">{error}</div>}
-          <button disabled={isLoading} className="button authFormButton">
-            Inscription
+          <input
+            required
+            aria-label="Nom"
+            placeholder="Nom"
+            className="authFormInput"
+            name="lastname"
+            type="text"
+            onChange={(e) => setLastname(e.target.value)}
+            value={lastname}
+            pattern="^(?![\s.]+$)[A-zÀ-ú\s\-]{1,25}$"
+          />
+        </div>
+        <input
+          required
+          aria-label="Adresse e-mail"
+          placeholder="Adresse e-mail"
+          className="authFormInput"
+          name="username"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+        />
+        <input
+          required
+          aria-label="Mot de passe"
+          placeholder="Mot de passe"
+          className="authFormInput"
+          name="password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+        {error && <div className="errorAuth">{error}</div>}
+        <button disabled={isLoading} className="button authFormButton">
+          Inscription
+        </button>
+        <div>
+          <button className="authFormText">
+            <Link to="/login">Déjà un compte? Connextez-vous !</Link>
           </button>
-          <div>
-            <button className="authFormText">
-              {/* onClick={() => props.onFormSwitch("login")} */}
-              <Link to="/login">Déjà un compte? Connextez-vous !</Link>
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -22,15 +22,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
   background-color: white;
   box-shadow: var(--shadow);
   border-radius: 1rem;
   padding: 1rem;
 }
 
+.signup {
+  gap: 1rem;
+}
+
+.login {
+  gap: 1rem;
+}
+
 .authForm > h3 {
   font-size: 1.5rem;
+}
+
+.grid {
+  flex: 1;
 }
 
 .authForm > div {
@@ -47,7 +58,7 @@
   background-color: var(--colorTertiary);
   border-radius: 8px;
   padding: 17px;
-  width: 90%;
+  width: 100%;
 }
 
 .authFormButton {
@@ -80,8 +91,10 @@
   color: var(--colorPrimary);
 }
 
-.errorLogin {
+.errorAuth {
   color: red;
+  max-width: 370px;
+  height: 3rem !important;
 }
 
 @media screen and (max-width: 990px) {

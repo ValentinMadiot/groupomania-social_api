@@ -14,7 +14,7 @@ const Login = () => {
 
   return (
       <div>
-        <form className="authForm" onSubmit={handleSubmit}>
+        <form className="authForm login" onSubmit={handleSubmit}>
           <h3>Connexion</h3>
           <input
             aria-label="Adresse e-mail"
@@ -34,14 +34,13 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          {error && <div className="errorLogin">{error}</div>}
+          {error && <div className="errorAuth">{error}</div>}
           <button disabled={isLoading} className="button authFormButton" type="submit">
             Connexion
           </button>
           <div>
             <button
               className="authFormText"
-              // onClick={() => props.onFormSwitch("signup")}
             >
               <Link to="/signup">
                 Vous n'avez pas de compte? Inscrivez-vous!
