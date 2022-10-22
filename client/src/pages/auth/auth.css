@@ -114,9 +114,6 @@
     gap: 1rem;
   }
 
-  .authFormInput {
-    width: 91%;
-  }
   .grid {
     display: flex;
     flex-direction: column;

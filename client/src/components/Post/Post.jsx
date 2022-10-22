@@ -113,7 +113,7 @@ const Post = ({ post }) => {
         </div>
         <div>
           {auth.user.admin || auth.user._id === post.userId ? (
-            <img src={edit} alt="edit" onClick={handleUpdate} />
+            <img src={edit} alt="edit" onClick={handleUpdate} className="ico"/>
           ) : null}
           <PostUpdateModal
             updatePostModal={updatePostModal}
@@ -121,7 +121,7 @@ const Post = ({ post }) => {
             data={post}
           />
           {auth.user.admin || auth.user._id === post.userId ? (
-            <img src={trash} alt="delete" onClick={handleDelete} />
+            <img src={trash} alt="delete" onClick={handleDelete} className="ico"/>
           ) : null}
         </div>
       </div>

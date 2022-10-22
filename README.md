@@ -19,14 +19,14 @@ Septième et dernier projet du parcours "Développeur web" chez OpenClassrooms. 
 
 Prérequis  : `Node.js` et `Npm` installés sur votre ordinateur
 
-- 1 : Installation : Depuis le dossier **api**, écrivez `npm init` dans votre terminal afin d'installer les dépendances. N'oubliez pas de renommer le fichier **.env.sample** en **.env** et de remplir les variables grâce à la note **.txt** des livrables.
+- 1 : Installation : Depuis le dossier **api**, écrivez `npm install` dans votre terminal afin d'installer les dépendances. N'oubliez pas de renommer le fichier **.env.sample** en **.env** et de remplir les variables grâce à la note **.txt** des livrables.
 
 
 - 2 : Lancement : Une fois les dépendances installées, toujours depuis le dossier **api**, lancez le script `npm start` dans votre terminal. Votre terminal devrait indiquer que le serveur est lancé sur le port 4200 (par défaut).
 
 ## Client - Frontend
 
--  1 : Installation : Depuis le dossier **client**, écrivez `npm init` dans votre terminal afin d'installer les dépendances. N'oubliez pas de renommer le fichier **.env.sample** en **.env** et de remplir les variables grâce à la note **.txt** des livrables. 
+-  1 : Installation : Depuis le dossier **client**, écrivez `npm install` dans votre terminal afin d'installer les dépendances. N'oubliez pas de renommer le fichier **.env.sample** en **.env** et de remplir les variables grâce à la note **.txt** des livrables. 
 
 - 2 : Lancement : Une fois les dépendances installées, toujours depuis le dossier **client**, lancez le script `npm start` dans votre terminal. L'application devrait se lancer sur [localhost port 3000](http://localhost:3000/) (par défaut). 
 
