@@ -28,7 +28,7 @@ const TopBar = () => {
           alt="logo Groupomania"
           onClick={handleScoll}
         />
-        <Link to="/login">
+        <Link to="/">
           <img
             className="topBarLogout"
             src={signOut}
