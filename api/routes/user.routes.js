@@ -1,4 +1,3 @@
-//* IMPORT
 const router = require("express").Router();
 const { getUser, getUsers, updateUser, deleteUser, } = require("../controllers/user.controllers");
 

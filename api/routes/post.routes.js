@@ -1,4 +1,3 @@
-//* IMPORTS
 const express = require("express");
 const requireAuth = require("../middleware/auth");
 const { createPost, getAllPosts, getOnePost, modifyPost, deletePost, likePost, } = require("../controllers/post.controllers");

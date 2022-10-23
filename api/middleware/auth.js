@@ -1,8 +1,6 @@
-//! IMPORT
 const jwt = require("jsonwebtoken");
-const User = require("../models/User.models");
 
-//* AUTHENTIFICATION UTILISATEUR
+//* AUTHENTIFICATION USER
 const requireAuth = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {

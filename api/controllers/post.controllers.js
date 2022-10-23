@@ -1,10 +1,5 @@
-//! IMPORTS
 const Post = require("../models/Post.models");
-const mongoose = require("mongoose");
-const fs = require("fs");
 const { unlink } = require("fs");
-
-//! CONTROLLERS POSTS
 
 //* CREATE
 const createPost = async (req, res) => {
@@ -56,7 +51,7 @@ const modifyPost = async (req, res) => {
     if (admin || post.userId === userId) {
       if ((req.body.image && post.image) || post.image) {
         const filename = post.image.split("public/images/")[0];
-        fs.unlink(`public/images/${filename}`, () => {});
+        unlink(`public/images/${filename}`, () => {});
       }
       await post.updateOne({ $set: req.body });
       res.status(200).json(req.body);
@@ -77,7 +72,7 @@ const deletePost = async (req, res) => {
     if (admin || post.userId === userId) {
       if (post.image) {
         const filename = post.image.split("public/images/")[0];
-        fs.unlink(`public/images/${filename}`, () => {
+        unlink(`public/images/${filename}`, () => {
           post.deleteOne();
         });
       }

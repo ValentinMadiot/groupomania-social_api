@@ -1,9 +1,6 @@
-//* IMPORT
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.models");
-
-//! CONTROLLERS USERS
 
 //* GET ALL USERS
 const getUsers = async (req, res) => {

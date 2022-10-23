@@ -1,7 +1,5 @@
-//* IMPORT
 const mongoose = require("mongoose");
 
-//* CONNEXTION A LA BASE DE DONNEE MONGODB
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -11,5 +9,4 @@ mongoose
     console.error("Connexion à MongoDB échouée ! " + error);
   });
 
-//* EXPORT
 module.exports = { mongoose };

@@ -1,9 +1,6 @@
-//! IMPORT
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.models");
-
-//! CONTROLLER USERS
 
 //* SIGNUP
 const signup = async (req, res) => {
