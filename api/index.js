@@ -1,31 +1,25 @@
-//* IMPORT
 const express = require("express");
 const helmet = require("helmet");
 require("dotenv").config();
 require("./services/database");
 const multer = require("multer");
+const cors = require("cors");
 
 const path = require("path");
-const cors = require("cors");
 
 //* IMPORT ROUTE
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
 
-//* EXPRESS
+//* APP
 const app = express();
 const port = process.env.PORT || 4200;
 
-//* HELMET => PROTEGE L'APPLICATION DE CERTAINES VULNERABILITES EN CONFIGURANT DE MANIERE APPROPRIEES DES HEADERS HTTP
+//* MIDDLEWARE
 app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
-
-//* PARAMETRAGE DES HEADERS HTTP
 app.use(cors());
-
-//* PARSER =>  ANALYSE LE CORPS D'UNE REQUETE HTTP, ASSEMBLE LES DONNEES, CREE UN OBJET BODY EXPLOITABLE
 app.use(express.json());
-
 //* SAVE IMAGES LOCAL
 app.use(express.static("public"));
 app.use("/images", express.static("images"));
@@ -52,8 +46,6 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
-
-//* CHEMIN IMAGE
 
 //* LANCEMENT SUR LE PORT
 app.listen(port, () => console.log("Listening on port : " + port));

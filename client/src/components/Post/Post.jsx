@@ -136,7 +136,7 @@ const Post = ({ post }) => {
       <div onClick={handleLike} className="postLike">
         <img
           src={liked ? likeIcon : likeEmpty}
-          alt="like"
+          alt="liked"
           title="Aimer ce message"
         />
         {like} likes

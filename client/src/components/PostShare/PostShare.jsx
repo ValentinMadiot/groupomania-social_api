@@ -92,7 +92,7 @@ const PostShare = () => {
         {error && <div className="error">{error}</div>}
         <div className="postShareOptions">
           <div onClick={() => imageRef.current.click()}>
-            <img src={image} alt="Selectionner une image" />Ajouter une image
+            <img src={image} alt="Selectionner" />Ajouter une image
           </div>
           <input
             className="postShareOption"
