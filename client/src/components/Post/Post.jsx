@@ -13,7 +13,7 @@ const Post = ({ post }) => {
   const { user: auth } = useAuthContext();
   const [updatePostModal, setUpdatePostModal] = useState(false);
 
-  //* DETAILS USER
+  //* DETAILS USER POST
   const [user, setUser] = useState({});
   useEffect(() => {
     const fetchUser = async () => {
@@ -30,6 +30,13 @@ const Post = ({ post }) => {
     };
     fetchUser();
   }, [post.userId, auth.token]);
+
+  //* UPDATE POST
+  const handleUpdate = () => {
+    if (auth.user.admin || auth.user._id === post.userId) {
+      setUpdatePostModal(true);
+    }
+  };
 
   //* DELETE POST
   const handleDelete = async () => {
@@ -50,7 +57,6 @@ const Post = ({ post }) => {
         });
         const json = await deleteRes.json();
         dispatch({ type: "DELETE_POST", payload: json });
-        // window.location.reload();
       }
     } catch (error) {
       console.log({ message: error.message });
@@ -60,6 +66,10 @@ const Post = ({ post }) => {
   //* LIKE POST
   const [like, setLike] = useState(post.likes.length);
   const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    setLiked(post.likes.includes(auth.user._id));
+  }, [auth.user._id, post.likes]);
 
   const handleLike = async () => {
     const likeReq = {
@@ -80,29 +90,18 @@ const Post = ({ post }) => {
     setLiked(!liked);
   };
 
-  useEffect(() => {
-    setLiked(post.likes.includes(auth.user._id));
-  }, [auth.user._id, post.likes]);
-
-  //* UPDATE
-  const handleUpdate = () => {
-    setUpdatePostModal(true);
-  };
-
   return (
     <section className="post">
       <div className="postProfil">
         <div>
-          <img
-            className="postProfilImg"
-            src={userDefault}
-            alt="photo de profil par défaut"
-          />
+          <img className="postProfilImg" src={userDefault} alt="photo de profil par défaut" />
           <div>
             <span className="postProfilName">
-              {user.firstname === user.lastname ? user.firstname : "" || 
-              user.firstname || user.lastname ? user.firstname + " " + user.lastname : ""
-              }
+              {user.firstname === user.lastname
+                ? user.firstname
+                : "" || user.firstname || user.lastname
+                ? user.firstname + " " + user.lastname
+                : ""}
             </span>
             <p className="postProfilDate">
               {format(new Date(post?.createdAt), "dd/MM/yyyy 'à' H:mm", {
@@ -111,35 +110,24 @@ const Post = ({ post }) => {
             </p>
           </div>
         </div>
-        <div>
-          {auth.user.admin || auth.user._id === post.userId ? (
-            <img src={edit} alt="edit" onClick={handleUpdate} className="ico"/>
-          ) : null}
-          <PostUpdateModal
-            updatePostModal={updatePostModal}
-            setUpdatePostModal={setUpdatePostModal}
-            data={post}
-          />
-          {auth.user.admin || auth.user._id === post.userId ? (
-            <img src={trash} alt="delete" onClick={handleDelete} className="ico"/>
-          ) : null}
-        </div>
+        {auth.user.admin || auth.user._id === post.userId ? (
+          <div>
+            <img src={edit} alt="edit" onClick={handleUpdate} className="ico" />
+            <PostUpdateModal
+              updatePostModal={updatePostModal}
+              setUpdatePostModal={setUpdatePostModal}
+              data={post}
+            />
+            <img src={trash} alt="delete" onClick={handleDelete} className="ico" />
+          </div>
+        ) : null}
       </div>
       <div className="postContents">
         <div className="postProfilDesc">{post.desc}</div>
-        <img
-          className="postImg"
-          alt=""
-          src={post.image ? PF + post.image : null}
-        />
+        <img className="postImg" alt="" src={post.image ? PF + post.image : null} />
       </div>
       <div onClick={handleLike} className="postLike">
-        <img
-          src={liked ? likeIcon : likeEmpty}
-          alt="liked"
-          title="Aimer ce message"
-        />
-        {like} likes
+        <img src={liked ? likeIcon : likeEmpty} alt="liked" /> {like} likes
       </div>
     </section>
   );

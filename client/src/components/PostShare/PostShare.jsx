@@ -22,7 +22,8 @@ const PostShare = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  //* SUBMIT POST SHARE
+  const handleShare = async (e) => {
     e.preventDefault();
     if (!currentUser) {
       setError("Vous devez être connecté");
@@ -76,7 +77,7 @@ const PostShare = () => {
 
   return (
     <section className="postShare">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleShare}>
         <div>
           <input
             type="text"

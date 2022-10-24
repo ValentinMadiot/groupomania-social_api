@@ -27,10 +27,8 @@ export const useLogin = () => {
       // save the user to local storage
       localStorage.setItem("user", JSON.stringify(json));
       navigate("/home");
-
       // update the auth context
       dispatch({ type: "LOGIN", payload: json });
-
       setIsLoading(false);
     }
   };

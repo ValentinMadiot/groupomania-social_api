@@ -26,9 +26,12 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  //* SUBMIT POST UPDATE
+  const handleUpdate = async (e) => {
     e.preventDefault();
-
+    if (updatePost.desc === "" && file === null) {
+      return
+    }
     if (auth.user.admin || auth.user._id === data.userId) {
       try {
         if (file) {
@@ -64,7 +67,6 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
         setUpdatePostModal(false);
         setFile(null);
         dispatch({ type: "UPDATE_POST", payload: json });
-        // window.location.reload();
       } catch (error) {
         console.log({ message: error.message });
       }
@@ -80,7 +82,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
       open={updatePostModal}
       onClose={handleClose}>
       <Box className="postUpdate">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleUpdate}>
           <div>
             <input
               type="text"

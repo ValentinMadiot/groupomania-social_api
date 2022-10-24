@@ -9,14 +9,14 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 
   const { signup, error, isLoading } = useSignup();
-  const handleSubmit = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     await signup(email, password, firstname, lastname);
   };
 
   return (
     <div>
-      <form className="authForm signup" onSubmit={handleSubmit}>
+      <form className="authForm signup" onSubmit={handleSignup}>
         <h3>Inscription</h3>
         <div className="grid">
           <input
@@ -24,7 +24,6 @@ const Signup = () => {
             aria-label="Prénom"
             placeholder="Prénom"
             className="authFormInput"
-            name="firstname"
             type="text"
             onChange={(e) => setFirstname(e.target.value)}
             value={firstname}
@@ -35,7 +34,6 @@ const Signup = () => {
             aria-label="Nom"
             placeholder="Nom"
             className="authFormInput"
-            name="lastname"
             type="text"
             onChange={(e) => setLastname(e.target.value)}
             value={lastname}
@@ -47,7 +45,6 @@ const Signup = () => {
           aria-label="Adresse e-mail"
           placeholder="Adresse e-mail"
           className="authFormInput"
-          name="username"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
@@ -58,7 +55,6 @@ const Signup = () => {
           aria-label="Mot de passe"
           placeholder="Mot de passe"
           className="authFormInput"
-          name="password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
