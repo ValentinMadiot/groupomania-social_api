@@ -1,0 +1,31 @@
+//=================================================================================
+// TEST DES REQUETES ENVOYE A L'API
+//=================================================================================
+GET http://localhost:3000/api/products HTTP/1.1
+Content-Type: application/json
+
+//=================================================================================
+
+GET http://localhost:3000/api/products/6304a7fe8578187de11ed7d9 HTTP/1.1
+Content-Type: application/json
+
+//=================================================================================
+
+POST http://localhost:3000/api/products HTTP/1.1
+Content-Type: application/json
+
+{"name": "avec then", "description": "Levbfvfsvbfbgfp", "price": 500, "inStock": true}
+
+//=================================================================================
+
+PUT http://localhost:3000/api/products/6304a7fe8578187de11ed7d9 HTTP/1.1
+Content-Type: application/json
+
+{"name": "My test product", "description": "Some stuff", "price": 40000, "inStock": true}
+
+//=================================================================================
+
+DELETE http://localhost:3000/api/products/6304a7fe8578187de11ed7d9 HTTP/1.1
+Content-Type: application/json
+
+{"name": "My test product", "description": "Some stuff", "price": 40000, "inStock": true}
