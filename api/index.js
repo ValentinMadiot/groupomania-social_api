@@ -8,7 +8,7 @@ require("./services/database");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
-const uploadRoute = require('./routes/upload.routes')
+const uploadRoute = require("./routes/upload.routes");
 
 //* APP
 const app = express();
@@ -16,7 +16,24 @@ const port = process.env.PORT || 4200;
 
 //* MIDDLEWARE
 app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:4200",
+  "https://groupomania-vm.vercel.app",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 //* IMAGES LOCAL
