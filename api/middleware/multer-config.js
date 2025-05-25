@@ -8,7 +8,7 @@ const storage = new CloudinaryStorage({
   params: {
     folder: "groupomania",
     allowed_formats: ["jpg", "jpeg", "png", "webp"],
-    public_id: (req, file) => Date.now() + "-" + file.originalname,
+    public_id: `${Date.now()}-${file.originalname}`,
   },
 });
 
