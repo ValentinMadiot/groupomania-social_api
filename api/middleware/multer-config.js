@@ -1,39 +1,43 @@
-//*--------------------------------------------------------------------------------
-//*---------------------------------- LIBRAIRIE -----------------------------------
-//*--------------------------------------------------------------------------------
+//* CLOUDINARY CONFIGUE
+const { cloudinary } = require("../services/cloudinary");
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-//* IMPORT MULTER
-const multer = require('multer')
-
-//*--------------------------------------------------------------------------------
-//*------------------------------- MULTER - CONFIG --------------------------------
-//*--------------------------------------------------------------------------------
-
-//* TYPES D'IMAGES ACCEPTE
-const MIME_TYPES = {
-  'image/jpg': 'jpg',
-  'image/jpeg': 'jpeg',
-  'image/png': 'png'
-}
-
-//* STOCKAGE DE L'IMAGE 
-//* UTILISER LA METHODE ".diskStorage" QUI CONFIGURE LE DOSSIER DE RECEPTION ET LE NOM DU FICHIER
-const storage = multer.diskStorage ({
-  destination: (req, file, callback) => {
-    //* CALLBACK (null = PAS D'ERREUR, "DOSSIER DE RECEPTION") 
-    callback(null, 'images')
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "groupomania",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    public_id: (req, file) => Date.now() + "-" + file.originalname,
   },
-  filename: (req, file, callback) => {
-    //* REMPLACER LES ESPACES PAR DES UNDERSCORES DANS LE NOM DU FICHIER D'ORIGINE
-    const name = file.originalname.split(' ').join('_')
-    //* AJOUTER UNE EXTENSION A PARTIR DE "mimetype"
-    const extension = MIME_TYPES[file.mimetype]
-    //* CALLBACK (null = PAS D'ERREUR, "name" + "date à la miliseconde" + '.' + "extension") 
-    callback(null, name + Date.now() + '.' + extension)
-  }
-})
+});
 
-//* EXPORT DE LA CONFIGURATION DE MULTER
-//* (AJOUTER AUX ROUTES SAUCE POUR ENRENGISTRER IMAGES AU SYSTEME DE FICHHIER DU SERVEUR)
-module.exports = multer({ storage }).single('image')
-//* APPEL MULTER ({ notre objet storage }) AVEC LA METHODE ".single('image')" = IMAGE UNIQUE
+const upload = multer({ storage });
+
+module.exports = upload;
+
+//* SCHOOL PROJECT
+// //* IMPORT MULTER
+// const multer = require('multer')
+
+// //* TYPES D'IMAGES ACCEPTE
+// const MIME_TYPES = {
+//   'image/jpg': 'jpg',
+//   'image/jpeg': 'jpeg',
+//   'image/png': 'png'
+// }
+
+// //* STOCKAGE DE L'IMAGE
+// const storage = multer.diskStorage ({
+//   destination: (req, file, callback) => {
+//     callback(null, 'images')
+//   },
+//   filename: (req, file, callback) => {
+//     const name = file.originalname.split(' ').join('_')
+//     const extension = MIME_TYPES[file.mimetype]
+//     callback(null, name + Date.now() + '.' + extension)
+//   }
+// })
+
+// //* EXPORT DE LA CONFIGURATION DE MULTER
+// module.exports = multer({ storage }).single('image')

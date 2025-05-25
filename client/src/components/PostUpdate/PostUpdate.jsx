@@ -37,26 +37,31 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
       try {
         if (file) {
           const data = new FormData();
-          const fileName = Date.now() + file.name;
-          data.append("name", fileName);
+          // const fileName = Date.now() + file.name;
+          // data.append("name", fileName);
           data.append("file", file);
           updatePost.image = fileName;
-
-          try {
-            await fetch(`${API_URL}/api/upload`, {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${auth.token}`,
-              },
-              body: data,
-            });
-          } catch (error) {
-            console.log({ message: error.message });
-          }
-        } else {
-          updatePost.image = null;
+          // try {
+          //   await fetch(`${API_URL}/api/upload`, {
+          const uploadRes = await fetch(`${API_URL}/api/upload`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+            body: data,
+          });
+          // }
+          const result = await uploadRes.json();
+          updatePost.image = result.imageUrl;
         }
-        const response = await fetch(`${API_URL}/api/posts/${data._id}`, {
+        //   catch (error) {
+        //     console.log({ message: error.message });
+        //   }
+        // } else {
+        //   updatePost.image = null;
+        // }
+        // const response = await fetch(`${API_URL}/api/posts/${data._id}`, {
+        const response = await fetch(`${API_URL}/api/posts/${updatePost._id}`, {
           method: "PUT",
           body: JSON.stringify(updatePost),
           headers: {

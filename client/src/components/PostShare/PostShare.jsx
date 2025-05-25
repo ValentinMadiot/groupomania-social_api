@@ -38,20 +38,26 @@ const PostShare = () => {
       userId: currentUser.user._id,
       desc: desc,
     };
+
     if (file) {
       const data = new FormData();
-      const fileName = Date.now() + file.name;
-      data.append("name", fileName);
+      // const fileName = Date.now() + file.name;
+      // data.append("name", fileName);
       data.append("file", file);
-      post.image = fileName;
+      // post.image = fileName;
+
       try {
-        await fetch(`${API_URL}/api/upload`, {
+        // await fetch(`${API_URL}/api/upload`, {
+        const uploadRes = await fetch(`${API_URL}/api/upload`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
           },
           body: data,
         });
+
+        const result = await uploadRes.json();
+        post.image = result.imageUrl;
       } catch (error) {
         console.log({ message: error.message });
       }
