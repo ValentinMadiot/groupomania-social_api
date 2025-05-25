@@ -1,4 +1,8 @@
 //* CLOUDINARY CONFIGUE
+const express = require("express");
+const router = express.Router();
+const upload = require("../middleware/multer-config");
+
 router.post("/", (req, res) => {
   upload.single("file")(req, res, (err) => {
     if (err) {
