@@ -16,6 +16,8 @@ router.post("/", (req, res) => {
   });
 });
 
+module.exports = router;
+
 //* SCHOOL PROJECT
 // const express = require("express");
 // const multer = require("multer");
