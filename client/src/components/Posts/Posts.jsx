@@ -4,12 +4,13 @@ import { usePostsContext } from "../../hooks/usePostsContext";
 import Post from "../Post/Post";
 
 const Posts = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { user } = useAuthContext();
   const { posts, dispatch } = usePostsContext();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/posts", {
+      const response = await fetch(`${API_URL}/api/posts`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

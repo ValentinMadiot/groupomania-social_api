@@ -1,13 +1,20 @@
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
-import { format } from "date-fns";
 
-import { userDefault, edit, trash, likeEmpty, likeIcon } from "../../assets/icons";
+import {
+  edit,
+  likeEmpty,
+  likeIcon,
+  trash,
+  userDefault,
+} from "../../assets/icons";
 import PostUpdateModal from "../PostUpdate/PostUpdate";
 import "./post.css";
 
 const Post = ({ post }) => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { dispatch } = usePostsContext();
   const { user: auth } = useAuthContext();
@@ -17,7 +24,7 @@ const Post = ({ post }) => {
   const [user, setUser] = useState({});
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch(`/api/users/${post.userId}`, {
+      const response = await fetch(`${API_URL}/api/users/${post.userId}`, {
         method: "GET",
         body: JSON.stringify(),
         headers: {
@@ -46,7 +53,7 @@ const Post = ({ post }) => {
     };
     try {
       if (auth.user.admin || auth.user._id === post.userId) {
-        const deleteRes = await fetch(`/api/posts/${post._id}`, {
+        const deleteRes = await fetch(`${API_URL}/api/posts/${post._id}`, {
           method: "DELETE",
           body: JSON.stringify(deleteReq),
           headers: {
@@ -75,7 +82,7 @@ const Post = ({ post }) => {
     const likeReq = {
       userId: auth.user._id,
     };
-    const likeRes = await fetch("/api/posts/" + post._id + "/like", {
+    const likeRes = await fetch(`${API_URL}/api/posts/` + post._id + "/like", {
       method: "POST",
       body: JSON.stringify(likeReq),
       headers: {
@@ -94,7 +101,11 @@ const Post = ({ post }) => {
     <section className="post">
       <div className="postProfil">
         <div>
-          <img className="postProfilImg" src={userDefault} alt="photo de profil par défaut" />
+          <img
+            className="postProfilImg"
+            src={userDefault}
+            alt="photo de profil par défaut"
+          />
           <div>
             <span className="postProfilName">
               {user.firstname === user.lastname
@@ -118,13 +129,22 @@ const Post = ({ post }) => {
               setUpdatePostModal={setUpdatePostModal}
               data={post}
             />
-            <img src={trash} alt="delete" onClick={handleDelete} className="ico" />
+            <img
+              src={trash}
+              alt="delete"
+              onClick={handleDelete}
+              className="ico"
+            />
           </div>
         ) : null}
       </div>
       <div className="postContents">
         <div className="postProfilDesc">{post.desc}</div>
-        <img className="postImg" alt="" src={post.image ? PF + post.image : null} />
+        <img
+          className="postImg"
+          alt=""
+          src={post.image ? PF + post.image : null}
+        />
       </div>
       <div onClick={handleLike} className="postLike">
         <img src={liked ? likeIcon : likeEmpty} alt="liked" /> {like} likes

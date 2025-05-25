@@ -2,12 +2,13 @@ import { useRef, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
 
-import { share, image, crossRemove } from "../../assets/icons";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { crossRemove, image, share } from "../../assets/icons";
 import "../PostUpdate/postupdate.css";
 
 function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { user: auth } = useAuthContext();
   const { dispatch } = usePostsContext();
 
@@ -30,7 +31,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
   const handleUpdate = async (e) => {
     e.preventDefault();
     if (updatePost.desc === "" && file === null) {
-      return
+      return;
     }
     if (auth.user.admin || auth.user._id === data.userId) {
       try {
@@ -42,7 +43,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           updatePost.image = fileName;
 
           try {
-            await fetch("/api/upload", {
+            await fetch(`${API_URL}/api/upload`, {
               method: "POST",
               headers: {
                 Authorization: `Bearer ${auth.token}`,
@@ -55,7 +56,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
         } else {
           updatePost.image = null;
         }
-        const response = await fetch(`/api/posts/${data._id}`, {
+        const response = await fetch(`${API_URL}/api/posts/${data._id}`, {
           method: "PUT",
           body: JSON.stringify(updatePost),
           headers: {
@@ -78,9 +79,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
   };
 
   return (
-    <Modal
-      open={updatePostModal}
-      onClose={handleClose}>
+    <Modal open={updatePostModal} onClose={handleClose}>
       <Box className="postUpdate">
         <form onSubmit={handleUpdate}>
           <div>
@@ -91,13 +90,13 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
               value={updatePost.desc}
             />
             <button type="submit" aria-label="soumettre">
-              <img className="postShareButton" src={share} alt="Partager"/>
+              <img className="postShareButton" src={share} alt="Partager" />
             </button>
           </div>
           <div className="postUpdateOptions">
             <label htmlFor={"image"} aria-label="Selectionner une image">
               <div onClick={() => imageRef.current.click()}>
-              <img src={image} alt="Selectionner une image" />
+                <img src={image} alt="Selectionner une image" />
                 Selectionner une image
               </div>
             </label>
@@ -111,7 +110,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           </div>
           {file && (
             <div className="uploaded-image-update">
-              <img src={URL.createObjectURL(file)} alt="Image du post"/>
+              <img src={URL.createObjectURL(file)} alt="Image du post" />
               <div className="close-icon" onClick={() => setFile(null)}>
                 {<img src={crossRemove} alt="Supprimer l'image" />}
               </div>

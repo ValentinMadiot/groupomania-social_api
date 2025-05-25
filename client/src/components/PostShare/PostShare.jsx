@@ -2,10 +2,11 @@ import { useRef, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
 
-import { share, image, crossRemove } from "../../assets/icons";
+import { crossRemove, image, share } from "../../assets/icons";
 import "./postshare.css";
 
 const PostShare = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { user: currentUser } = useAuthContext();
   const { dispatch } = usePostsContext();
 
@@ -30,7 +31,7 @@ const PostShare = () => {
       return;
     }
     if (desc === "" && file === null) {
-      setError("Vous devez ajouter une description et/ou une photo")
+      setError("Vous devez ajouter une description et/ou une photo");
       return;
     }
     const post = {
@@ -44,7 +45,7 @@ const PostShare = () => {
       data.append("file", file);
       post.image = fileName;
       try {
-        await fetch("/api/upload", {
+        await fetch(`${API_URL}/api/upload`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
@@ -56,7 +57,7 @@ const PostShare = () => {
       }
     }
     try {
-      const response = await fetch("/api/posts", {
+      const response = await fetch(`${API_URL}/api/posts`, {
         method: "POST",
         body: JSON.stringify(post),
         headers: {
@@ -67,7 +68,7 @@ const PostShare = () => {
       const json = await response.json();
       setDesc("");
       setFile(null);
-      setError(null)
+      setError(null);
       dispatch({ type: "CREATE_POST", payload: json });
       // window.location.reload();
     } catch (error) {
@@ -87,13 +88,14 @@ const PostShare = () => {
             aria-label="Partage tes expériences ici"
           />
           <button type="submit" aria-label="Soumettre">
-            <img className="postShareButton" src={share} alt="Partager"/>
+            <img className="postShareButton" src={share} alt="Partager" />
           </button>
         </div>
         {error && <div className="error">{error}</div>}
         <div className="postShareOptions">
           <div onClick={() => imageRef.current.click()}>
-            <img src={image} alt="Selectionner" />Ajouter une image
+            <img src={image} alt="Selectionner" />
+            Ajouter une image
           </div>
           <input
             className="postShareOption"
@@ -106,9 +108,9 @@ const PostShare = () => {
         </div>
         {file && (
           <div className="uploaded-image">
-            <img src={URL.createObjectURL(file)} alt="Image du post"/>
+            <img src={URL.createObjectURL(file)} alt="Image du post" />
             <div className="close-icon" onClick={() => setFile(null)}>
-              {<img src={crossRemove} alt="Supprimer l'image"/>}
+              {<img src={crossRemove} alt="Supprimer l'image" />}
             </div>
           </div>
         )}
