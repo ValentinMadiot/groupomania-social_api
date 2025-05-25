@@ -1,21 +1,36 @@
 //* CLOUDINARY CONFIGUE
-const { cloudinary } = require("../services/cloudinary");
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const { cloudinary } = require("../services/cloudinary");
 
+// Configuration du storage
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: async (req, file) => {
-    return {
-      folder: "groupomania",
-      allowed_formats: ["jpg", "jpeg", "png", "webp"],
-    };
-  },
+  params: async (req, file) => ({
+    folder: "groupomania-social",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    transformation: [{ width: 800, height: 800, crop: "limit" }],
+  }),
 });
 
-const upload = multer({ storage });
+// Filtrage des types MIME
+const fileFilter = (req, file, cb) => {
+  const allowedMimeTypes = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+  ];
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Type de fichier non autorisé"), false);
+  }
+};
 
-module.exports = upload;
+const upload = multer({ storage, fileFilter });
+
+module.exports = upload.single("file");
 
 //* SCHOOL PROJECT
 // //* IMPORT MULTER
