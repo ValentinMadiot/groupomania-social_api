@@ -40,7 +40,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           // const fileName = Date.now() + file.name;
           // data.append("name", fileName);
           data.append("file", file);
-          updatePost.image = fileName;
+          // updatePost.image = fileName;
           // try {
           //   await fetch(`${API_URL}/api/upload`, {
           const uploadRes = await fetch(`${API_URL}/api/upload`, {
