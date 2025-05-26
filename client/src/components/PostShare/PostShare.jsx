@@ -55,13 +55,18 @@ const PostShare = () => {
           },
           body: data,
         });
-
-        const result = await uploadRes.json();
-        post.image = result.imageUrl;
-      } catch (error) {
-        console.log({ message: error.message });
+        let result;
+        result = await uploadRes.json();
+        updatePost.image = result.imageUrl;
+        // const result = await uploadRes.json();
+        // post.image = result.imageUrl;
+      } catch (err) {
+        const text = await uploadRes.text(); // fallback HTML
+        console.error("❌ Erreur serveur : ", text);
+        return;
       }
     }
+
     try {
       const response = await fetch(`${API_URL}/api/posts`, {
         method: "POST",

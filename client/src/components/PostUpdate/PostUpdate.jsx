@@ -50,9 +50,18 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             },
             body: data,
           });
+          let result;
+          try {
+            result = await uploadRes.json();
+            updatePost.image = result.imageUrl;
+          } catch (err) {
+            const text = await uploadRes.text(); // fallback HTML
+            console.error("❌ Erreur serveur : ", text);
+            return;
+          }
           // }
-          const result = await uploadRes.json();
-          updatePost.image = result.imageUrl;
+          // const result = await uploadRes.json();
+          // updatePost.image = result.imageUrl;
         }
         //   catch (error) {
         //     console.log({ message: error.message });
