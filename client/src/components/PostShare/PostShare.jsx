@@ -17,37 +17,38 @@ const PostShare = () => {
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      setFile(img);
+      setFile(event.target.files[0]);
     }
   };
 
   const handleShare = async (e) => {
     e.preventDefault();
+
     if (!currentUser) {
       setError("Vous devez être connecté");
       return;
     }
+
     if (desc === "" && file === null) {
       setError("Vous devez ajouter une description et/ou une photo");
       return;
     }
+
     const post = {
       userId: currentUser.user._id,
       desc: desc,
     };
 
     if (file) {
-      const formData = new FormData();
-      formData.append("image", file);
-
+      const data = new FormData();
+      data.append("image", file); // ✅ important
       try {
         const uploadRes = await fetch(`${API_URL}/api/upload`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
           },
-          body: formData,
+          body: data,
         });
 
         try {
@@ -55,11 +56,11 @@ const PostShare = () => {
           post.image = result.imageUrl;
         } catch (err) {
           const text = await uploadRes.text();
-          console.error("❌ Erreur serveur (upload):", text);
+          console.error("❌ Erreur Cloudinary (HTML):", text);
           return;
         }
       } catch (err) {
-        console.error("❌ Erreur réseau lors de l'upload:", err);
+        console.error("❌ Erreur réseau upload:", err.message);
         return;
       }
     }
@@ -67,19 +68,20 @@ const PostShare = () => {
     try {
       const response = await fetch(`${API_URL}/api/posts`, {
         method: "POST",
-        body: JSON.stringify(post),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${currentUser.token}`,
         },
+        body: JSON.stringify(post),
       });
+
       const json = await response.json();
       setDesc("");
       setFile(null);
       setError(null);
       dispatch({ type: "CREATE_POST", payload: json });
-    } catch (error) {
-      console.log({ message: error.message });
+    } catch (err) {
+      console.error("❌ Erreur création post :", err.message);
     }
   };
 
@@ -101,7 +103,7 @@ const PostShare = () => {
         {error && <div className="error">{error}</div>}
         <div className="postShareOptions">
           <div onClick={() => imageRef.current.click()}>
-            <img src={image} alt="Selectionner" />
+            <img src={image} alt="Sélectionner" />
             Ajouter une image
           </div>
           <input
@@ -110,7 +112,7 @@ const PostShare = () => {
             accept="image/png, image/jpeg, image/jpg, image/webp"
             ref={imageRef}
             onChange={onImageChange}
-            aria-label="Selectionner une image"
+            aria-label="Sélectionner une image"
           />
         </div>
         {file && (

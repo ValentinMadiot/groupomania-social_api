@@ -13,35 +13,36 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
   const { dispatch } = usePostsContext();
 
   const [updatePost, setUpdatePost] = useState(data);
+  const imageRef = useRef();
+  const [file, setFile] = useState(null);
+
   const handleDetails = (e) => {
     setUpdatePost({ ...updatePost, [e.target.name]: e.target.value });
   };
 
-  const imageRef = useRef();
-  const [file, setFile] = useState(null);
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      setFile(img);
+      setFile(event.target.files[0]);
     }
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+
     if (updatePost.desc === "" && file === null) return;
 
     if (auth.user.admin || auth.user._id === data.userId) {
       try {
         if (file) {
-          const formData = new FormData();
-          formData.append("image", file);
+          const data = new FormData();
+          data.append("image", file); // ✅ important
 
           const uploadRes = await fetch(`${API_URL}/api/upload`, {
             method: "POST",
             headers: {
               Authorization: `Bearer ${auth.token}`,
             },
-            body: formData,
+            body: data,
           });
 
           try {
@@ -49,25 +50,26 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             updatePost.image = result.imageUrl;
           } catch (err) {
             const text = await uploadRes.text();
-            console.error("❌ Erreur serveur (upload):", text);
+            console.error("❌ Erreur JSON/HTML :", text);
             return;
           }
         }
 
         const response = await fetch(`${API_URL}/api/posts/${updatePost._id}`, {
           method: "PUT",
-          body: JSON.stringify(updatePost),
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${auth.token}`,
           },
+          body: JSON.stringify(updatePost),
         });
+
         const json = await response.json();
         setUpdatePostModal(false);
         setFile(null);
         dispatch({ type: "UPDATE_POST", payload: json });
-      } catch (error) {
-        console.error("Erreur mise à jour post:", error);
+      } catch (err) {
+        console.error("❌ Erreur mise à jour post:", err.message);
       }
     }
   };
@@ -92,10 +94,10 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             </button>
           </div>
           <div className="postUpdateOptions">
-            <label htmlFor="image" aria-label="Selectionner une image">
+            <label htmlFor={"image"} aria-label="Sélectionner une image">
               <div onClick={() => imageRef.current.click()}>
-                <img src={image} alt="Selectionner une image" />
-                Selectionner une image
+                <img src={image} alt="Sélectionner une image" />
+                Sélectionner une image
               </div>
             </label>
             <input
