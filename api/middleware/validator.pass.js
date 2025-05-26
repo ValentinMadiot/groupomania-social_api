@@ -29,11 +29,10 @@ module.exports = (req, res, next) => {
     const messages = {
       min: "au moins 8 caractères",
       max: "maximum 32 caractères",
-      uppercase: "au moins une majuscule",
-      lowercase: "au moins une minuscule",
-      digits: "au moins un chiffre",
+      uppercase: "au moins 1 majuscule",
+      lowercase: "au moins 1 minuscule",
+      digits: "au moins 1 chiffre",
       spaces: "aucun espace autorisé",
-      oneOf: "ne pas utiliser de mot de passe trop commun (ex: Password123)",
     };
 
     const feedback = failed.map((rule) => messages[rule]).join(", ");

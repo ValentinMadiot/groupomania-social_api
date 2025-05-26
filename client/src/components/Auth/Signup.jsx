@@ -9,8 +9,18 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 
   const { signup, error, isLoading } = useSignup();
+
+  const [customError, setCustomError] = useState("");
+
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    if (!firstname || !lastname || !email || !password) {
+      setCustomError("Tous les champs doivent être remplis.");
+      return;
+    }
+
+    setCustomError("");
     await signup(email, password, firstname, lastname);
   };
 
@@ -20,7 +30,6 @@ const Signup = () => {
         <h3>Inscription</h3>
         <div className="grid">
           <input
-            required
             aria-label="Prénom"
             placeholder="Prénom"
             className="authFormInput"
@@ -30,7 +39,6 @@ const Signup = () => {
             pattern="^(?![\s.]+$)[A-zÀ-ú\s\-]{1,25}$"
           />
           <input
-            required
             aria-label="Nom"
             placeholder="Nom"
             className="authFormInput"
@@ -41,7 +49,6 @@ const Signup = () => {
           />
         </div>
         <input
-          required
           aria-label="Adresse e-mail"
           placeholder="Adresse e-mail"
           className="authFormInput"
@@ -51,7 +58,6 @@ const Signup = () => {
           pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
         />
         <input
-          required
           aria-label="Mot de passe"
           placeholder="Mot de passe"
           className="authFormInput"
@@ -59,14 +65,16 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
-        {error && <div className="errorAuth">{error}</div>}
+        {(customError || error) && (
+          <div className="errorAuth">{customError || error}</div>
+        )}
         <button disabled={isLoading} className="button authFormButton">
           Inscription
         </button>
         <div>
-          <button className="authFormText">
+          <p className="authFormText">
             <Link to="/">Déjà un compte? Connextez-vous !</Link>
-          </button>
+          </p>
         </div>
       </form>
     </div>

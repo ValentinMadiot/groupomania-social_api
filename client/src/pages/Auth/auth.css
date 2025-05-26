@@ -80,6 +80,9 @@
 }
 
 .authFormText {
+  padding: 0;
+  border: none;
+  background: var(--colorTertiary);
   font-weight: 300;
   cursor: pointer;
   margin-top: -1.5rem;

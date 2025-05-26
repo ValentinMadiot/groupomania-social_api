@@ -41,9 +41,9 @@ const Login = () => {
         Connexion
       </button>
       <div>
-        <button className="authFormText">
+        <p className="authFormText">
           <Link to="/signup">Vous n'avez pas de compte? Inscrivez-vous!</Link>
-        </button>
+        </p>
       </div>
     </form>
   );
