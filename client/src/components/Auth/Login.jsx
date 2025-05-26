@@ -6,9 +6,20 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isLoading, error } = useLogin();
+  const [customError, setCustomError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      setCustomError("Veuillez remplir tous les champs.");
+      return;
+    }
+    if (!email.includes("@")) {
+      setCustomError("L'adresse e-mail est invalide.");
+      return;
+    }
+
+    setCustomError("");
     await login(email, password);
   };
 
@@ -16,16 +27,14 @@ const Login = () => {
     <form className="authForm login" onSubmit={handleLogin}>
       <h3>Connexion</h3>
       <input
-        required
         aria-label="Adresse e-mail"
         placeholder="Adresse e-mail"
         className="authFormInput"
-        type="email"
+        type="text"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
       />
       <input
-        required
         aria-label="Mot de passe"
         placeholder="Mot de passe"
         className="authFormInput"
@@ -33,7 +42,9 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      {error && <div className="errorAuth">{error}</div>}
+      {(customError || error) && (
+        <div className="errorAuth">{customError || error}</div>
+      )}
       <button
         disabled={isLoading}
         className="button authFormButton"

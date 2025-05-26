@@ -19,6 +19,24 @@ const Signup = () => {
       setCustomError("Tous les champs doivent être remplis.");
       return;
     }
+    if (!email.includes("@")) {
+      setCustomError("L'adresse e-mail est invalide.");
+      return;
+    }
+
+    // Validation basique du mot de passe
+    const passwordIsValid =
+      password.length >= 8 &&
+      /[A-Z]/.test(password) &&
+      /[a-z]/.test(password) &&
+      /\d/.test(password);
+
+    if (!passwordIsValid) {
+      setCustomError(
+        "Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule et 1 chiffre."
+      );
+      return;
+    }
 
     setCustomError("");
     await signup(email, password, firstname, lastname);
@@ -52,7 +70,7 @@ const Signup = () => {
           aria-label="Adresse e-mail"
           placeholder="Adresse e-mail"
           className="authFormInput"
-          type="email"
+          type="text"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
@@ -73,7 +91,7 @@ const Signup = () => {
         </button>
         <div>
           <p className="authFormText">
-            <Link to="/">Déjà un compte? Connextez-vous !</Link>
+            <Link to="/">Déjà un compte? Connectez-vous !</Link>
           </p>
         </div>
       </form>
