@@ -19,7 +19,9 @@ const Signup = () => {
       setCustomError("Tous les champs doivent être remplis.");
       return;
     }
-    if (!email.includes("@")) {
+    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!isValidEmail(email)) {
       setCustomError("L'adresse e-mail est invalide.");
       return;
     }
@@ -73,7 +75,6 @@ const Signup = () => {
           type="text"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
-          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
         />
         <input
           aria-label="Mot de passe"
