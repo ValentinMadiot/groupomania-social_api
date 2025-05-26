@@ -33,15 +33,15 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
     if (auth.user.admin || auth.user._id === data.userId) {
       try {
         if (file) {
-          const data = new FormData();
-          data.append("file", file);
+          const formData = new FormData();
+          formData.append("file", file);
 
           const uploadRes = await fetch(`${API_URL}/api/upload`, {
             method: "POST",
             headers: {
               Authorization: `Bearer ${auth.token}`,
             },
-            body: data,
+            body: formData,
           });
 
           try {
@@ -49,7 +49,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             updatePost.image = result.imageUrl;
           } catch (err) {
             const text = await uploadRes.text();
-            console.error("❌ Erreur serveur (upload) :", text);
+            console.error("❌ Erreur serveur (upload):", text);
             return;
           }
         }
@@ -67,7 +67,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
         setFile(null);
         dispatch({ type: "UPDATE_POST", payload: json });
       } catch (error) {
-        console.log({ message: error.message });
+        console.error("Erreur mise à jour post:", error);
       }
     }
   };

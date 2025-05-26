@@ -55,11 +55,11 @@ const PostShare = () => {
           post.image = result.imageUrl;
         } catch (err) {
           const text = await uploadRes.text();
-          console.error("❌ Erreur serveur (upload) :", text);
+          console.error("❌ Erreur serveur (upload):", text);
           return;
         }
       } catch (err) {
-        console.error("❌ Erreur réseau lors de l'upload :", err);
+        console.error("❌ Erreur réseau lors de l'upload:", err);
         return;
       }
     }
