@@ -13,23 +13,30 @@ export const useSignup = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`${API_URL}/api/auth/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, firstname, lastname }),
-    });
-    const json = await response.json();
+    try {
+      const response = await fetch(`${API_URL}/api/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, firstname, lastname }),
+      });
 
-    if (!response.ok) {
-      setIsLoading(false);
-      setError(json.error);
-    }
-    if (response.ok) {
-      // save the user to local storage
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(
+          json.error ||
+            "Une erreur inconnue est survenue lors de l'inscription."
+        );
+        setIsLoading(false);
+        return;
+      }
+
       localStorage.setItem("user", JSON.stringify(json));
-      navigate("/");
-      // update the auth context
       dispatch({ type: "LOGIN", payload: json });
+      navigate("/");
+      setIsLoading(false);
+    } catch (err) {
+      setError("Erreur de connexion au serveur. Veuillez réessayer plus tard.");
       setIsLoading(false);
     }
   };

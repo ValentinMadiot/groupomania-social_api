@@ -16,6 +16,7 @@ const Login = () => {
     <form className="authForm login" onSubmit={handleLogin}>
       <h3>Connexion</h3>
       <input
+        required
         aria-label="Adresse e-mail"
         placeholder="Adresse e-mail"
         className="authFormInput"
@@ -24,25 +25,27 @@ const Login = () => {
         value={email}
       />
       <input
+        required
         aria-label="Mot de passe"
-        className="authFormInput"
         placeholder="Mot de passe"
+        className="authFormInput"
         type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
       {error && <div className="errorAuth">{error}</div>}
-      <button disabled={isLoading} className="button authFormButton" type="submit">
+      <button
+        disabled={isLoading}
+        className="button authFormButton"
+        type="submit">
         Connexion
       </button>
       <div>
         <button className="authFormText">
-          <Link to="/signup">
-            Vous n'avez pas de compte? Inscrivez-vous!
-          </Link>
+          <Link to="/signup">Vous n'avez pas de compte? Inscrivez-vous!</Link>
         </button>
       </div>
-    </form>   
+    </form>
   );
 };
 

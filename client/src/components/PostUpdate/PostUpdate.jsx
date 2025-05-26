@@ -116,6 +116,19 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
               </div>
             </div>
           )}
+
+          {!file && updatePost.image && (
+            <div className="uploaded-image-update">
+              <img src={updatePost.image} alt="Image existante du post" />
+              <div
+                className="close-icon"
+                onClick={() => {
+                  setUpdatePost({ ...updatePost, image: null });
+                }}>
+                <img src={crossRemove} alt="Supprimer l'image" />
+              </div>
+            </div>
+          )}
         </form>
       </Box>
     </Modal>
