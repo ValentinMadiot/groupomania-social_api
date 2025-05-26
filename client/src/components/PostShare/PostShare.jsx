@@ -38,8 +38,8 @@ const PostShare = () => {
     };
 
     if (file) {
-      const data = new FormData();
-      data.append("file", file);
+      const formData = new FormData();
+      formData.append("image", file);
 
       try {
         const uploadRes = await fetch(`${API_URL}/api/upload`, {
@@ -47,7 +47,7 @@ const PostShare = () => {
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
           },
-          body: data,
+          body: formData,
         });
 
         try {

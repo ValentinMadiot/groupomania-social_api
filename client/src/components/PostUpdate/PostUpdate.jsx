@@ -34,7 +34,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
       try {
         if (file) {
           const formData = new FormData();
-          formData.append("file", file);
+          formData.append("image", file);
 
           const uploadRes = await fetch(`${API_URL}/api/upload`, {
             method: "POST",
