@@ -1,18 +1,11 @@
 //* CLOUDINARY CONFIGUE
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("cloudinary").v2;
-
-// Configuration Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
-});
+const { cloudinary } = require("../services/cloudinary");
 
 // Configuration du storage Cloudinary
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
+  cloudinary,
   params: {
     folder: "groupomania-social",
     allowed_formats: ["jpg", "jpeg", "png", "webp"],

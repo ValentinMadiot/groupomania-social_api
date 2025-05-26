@@ -15,7 +15,7 @@ import "./post.css";
 
 const Post = ({ post }) => {
   const API_URL = process.env.REACT_APP_API_URL;
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { dispatch } = usePostsContext();
   const { user: auth } = useAuthContext();
   const [updatePostModal, setUpdatePostModal] = useState(false);
@@ -58,7 +58,6 @@ const Post = ({ post }) => {
           body: JSON.stringify(deleteReq),
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
             Authorization: `Bearer ${auth.token}`,
           },
         });
@@ -140,11 +139,13 @@ const Post = ({ post }) => {
       </div>
       <div className="postContents">
         <div className="postProfilDesc">{post.desc}</div>
-        <img
-          className="postImg"
-          alt=""
-          src={post.image ? PF + post.image : null}
-        />
+        {post.image && (
+          <img
+            className="postImg"
+            alt="Contenu partagé"
+            src={post.image} // URL complète depuis Cloudinary
+          />
+        )}
       </div>
       <div onClick={handleLike} className="postLike">
         <img src={liked ? likeIcon : likeEmpty} alt="liked" /> {like} likes
