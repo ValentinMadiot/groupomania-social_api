@@ -17,7 +17,6 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
     setUpdatePost({ ...updatePost, [e.target.name]: e.target.value });
   };
 
-  //* IMAGE
   const imageRef = useRef();
   const [file, setFile] = useState(null);
   const onImageChange = (event) => {
@@ -27,22 +26,16 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
     }
   };
 
-  //* SUBMIT POST UPDATE
   const handleUpdate = async (e) => {
     e.preventDefault();
-    if (updatePost.desc === "" && file === null) {
-      return;
-    }
+    if (updatePost.desc === "" && file === null) return;
+
     if (auth.user.admin || auth.user._id === data.userId) {
       try {
         if (file) {
           const data = new FormData();
-          // const fileName = Date.now() + file.name;
-          // data.append("name", fileName);
           data.append("file", file);
-          // updatePost.image = fileName;
-          // try {
-          //   await fetch(`${API_URL}/api/upload`, {
+
           const uploadRes = await fetch(`${API_URL}/api/upload`, {
             method: "POST",
             headers: {
@@ -50,26 +43,17 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             },
             body: data,
           });
-          let result;
+
           try {
-            result = await uploadRes.json();
+            const result = await uploadRes.json();
             updatePost.image = result.imageUrl;
           } catch (err) {
-            const text = await uploadRes.text(); // fallback HTML
-            console.error("❌ Erreur serveur : ", text);
+            const text = await uploadRes.text();
+            console.error("❌ Erreur serveur (upload) :", text);
             return;
           }
-          // }
-          // const result = await uploadRes.json();
-          // updatePost.image = result.imageUrl;
         }
-        //   catch (error) {
-        //     console.log({ message: error.message });
-        //   }
-        // } else {
-        //   updatePost.image = null;
-        // }
-        // const response = await fetch(`${API_URL}/api/posts/${data._id}`, {
+
         const response = await fetch(`${API_URL}/api/posts/${updatePost._id}`, {
           method: "PUT",
           body: JSON.stringify(updatePost),
@@ -108,7 +92,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             </button>
           </div>
           <div className="postUpdateOptions">
-            <label htmlFor={"image"} aria-label="Selectionner une image">
+            <label htmlFor="image" aria-label="Selectionner une image">
               <div onClick={() => imageRef.current.click()}>
                 <img src={image} alt="Selectionner une image" />
                 Selectionner une image
@@ -126,7 +110,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             <div className="uploaded-image-update">
               <img src={URL.createObjectURL(file)} alt="Image du post" />
               <div className="close-icon" onClick={() => setFile(null)}>
-                {<img src={crossRemove} alt="Supprimer l'image" />}
+                <img src={crossRemove} alt="Supprimer l'image" />
               </div>
             </div>
           )}

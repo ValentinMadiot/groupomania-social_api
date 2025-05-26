@@ -15,7 +15,6 @@ const PostShare = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
 
-  //* IMAGE
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
@@ -23,7 +22,6 @@ const PostShare = () => {
     }
   };
 
-  //* SUBMIT POST SHARE
   const handleShare = async (e) => {
     e.preventDefault();
     if (!currentUser) {
@@ -41,13 +39,9 @@ const PostShare = () => {
 
     if (file) {
       const data = new FormData();
-      // const fileName = Date.now() + file.name;
-      // data.append("name", fileName);
       data.append("file", file);
-      // post.image = fileName;
 
       try {
-        // await fetch(`${API_URL}/api/upload`, {
         const uploadRes = await fetch(`${API_URL}/api/upload`, {
           method: "POST",
           headers: {
@@ -55,14 +49,17 @@ const PostShare = () => {
           },
           body: data,
         });
-        let result;
-        result = await uploadRes.json();
-        updatePost.image = result.imageUrl;
-        // const result = await uploadRes.json();
-        // post.image = result.imageUrl;
+
+        try {
+          const result = await uploadRes.json();
+          post.image = result.imageUrl;
+        } catch (err) {
+          const text = await uploadRes.text();
+          console.error("❌ Erreur serveur (upload) :", text);
+          return;
+        }
       } catch (err) {
-        const text = await uploadRes.text(); // fallback HTML
-        console.error("❌ Erreur serveur : ", text);
+        console.error("❌ Erreur réseau lors de l'upload :", err);
         return;
       }
     }
@@ -81,7 +78,6 @@ const PostShare = () => {
       setFile(null);
       setError(null);
       dispatch({ type: "CREATE_POST", payload: json });
-      // window.location.reload();
     } catch (error) {
       console.log({ message: error.message });
     }
@@ -121,7 +117,7 @@ const PostShare = () => {
           <div className="uploaded-image">
             <img src={URL.createObjectURL(file)} alt="Image du post" />
             <div className="close-icon" onClick={() => setFile(null)}>
-              {<img src={crossRemove} alt="Supprimer l'image" />}
+              <img src={crossRemove} alt="Supprimer l'image" />
             </div>
           </div>
         )}
