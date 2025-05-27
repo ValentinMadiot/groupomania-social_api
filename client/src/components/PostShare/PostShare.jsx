@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
 
-import { crossRemove, image, share } from "../../assets/icons";
+import { crossRemove, imgIco, share } from "../../assets/icons";
 import "./postshare.css";
 
 const PostShare = () => {
@@ -103,7 +103,7 @@ const PostShare = () => {
         {error && <div className="error">{error}</div>}
         <div className="postShareOptions">
           <div onClick={() => imageRef.current.click()}>
-            <img src={image} alt="Sélectionner" />
+            <img src={imgIco} alt="Sélectionner" />
             Ajouter une image
           </div>
           <input
@@ -117,7 +117,10 @@ const PostShare = () => {
         </div>
         {file && (
           <div className="uploaded-image">
-            <img src={URL.createObjectURL(file)} alt="Image du post" />
+            <img
+              src={URL.createObjectURL(file)}
+              alt="Prévisualisation du post"
+            />
             <div className="close-icon" onClick={() => setFile(null)}>
               <img src={crossRemove} alt="Supprimer l'image" />
             </div>

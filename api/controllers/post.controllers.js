@@ -1,5 +1,6 @@
 const Post = require("../models/Post.models");
 const { unlink } = require("fs");
+const { uploader } = require("../services/cloudinary");
 
 //* CREATE
 const createPost = async (req, res) => {
@@ -46,18 +47,42 @@ const getOnePost = async (req, res) => {
 const modifyPost = async (req, res) => {
   const postId = req.params.id;
   const { userId, admin } = req.body;
+
   try {
     const post = await Post.findById(postId);
-    if (admin || post.userId === userId) {
-      if ((req.body.image && post.image) || post.image) {
-        const filename = post.image.split("public/images/")[0];
-        unlink(`public/images/${filename}`, () => {});
-      }
-      await post.updateOne({ $set: req.body });
-      res.status(200).json(req.body);
-    } else {
-      res.status(403).json({error : "Vous ne pouvez mettre à jour que vos propres messages !"});
+    if (!post) return res.status(404).json({ error: "Post introuvable" });
+    if (!(admin || post.userId === userId)) {
+      return res.status(403).json({ error: "Modification non autorisée" });
     }
+
+    const oldImage = post.image;
+    const newImage = req.body.image;
+    const isProd = process.env.NODE_ENV === "production";
+
+    // Cas 1 : suppression manuelle d'image (champ image supprimé dans la requête)
+    if (!newImage && oldImage) {
+      if (isProd && oldImage.startsWith("https://res.cloudinary.com")) {
+        const publicId = oldImage.split("/").pop().split(".")[0];
+        await uploader.destroy(`groupomania-social/${publicId}`);
+      } else {
+        const filename = oldImage.split("/public/images/")[1];
+        if (filename) unlink(`public/images/${filename}`, () => {});
+      }
+    }
+
+    // Cas 2 : remplacement d'image
+    if (newImage && newImage !== oldImage && oldImage) {
+      if (isProd && oldImage.startsWith("https://res.cloudinary.com")) {
+        const publicId = oldImage.split("/").pop().split(".")[0];
+        await uploader.destroy(`groupomania-social/${publicId}`);
+      } else {
+        const filename = oldImage.split("/public/images/")[1];
+        if (filename) unlink(`public/images/${filename}`, () => {});
+      }
+    }
+
+    await post.updateOne({ $set: req.body });
+    res.status(200).json(req.body);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -67,20 +92,29 @@ const modifyPost = async (req, res) => {
 const deletePost = async (req, res) => {
   const postId = req.params.id;
   const { userId, admin } = req.body;
+
   try {
     const post = await Post.findById(postId);
-    if (admin || post.userId === userId) {
-      if (post.image) {
-        const filename = post.image.split("public/images/")[0];
-        unlink(`public/images/${filename}`, () => {
-          post.deleteOne();
-        });
-      }
-      post.deleteOne();
-      res.status(200).json(post);
-    } else {
-      res.status(403).json({error : "Vous ne pouvez mettre à jour que vos propres messages !"});
+    if (!post) return res.status(404).json({ error: "Post introuvable" });
+    if (!(admin || post.userId === userId)) {
+      return res.status(403).json({ error: "Suppression non autorisée" });
     }
+
+    const image = post.image;
+    const isProd = process.env.NODE_ENV === "production";
+
+    if (image) {
+      if (isProd && image.startsWith("https://res.cloudinary.com")) {
+        const publicId = image.split("/").pop().split(".")[0];
+        await uploader.destroy(`groupomania-social/${publicId}`);
+      } else {
+        const filename = image.split("/public/images/")[1];
+        if (filename) unlink(`public/images/${filename}`, () => {});
+      }
+    }
+
+    await post.deleteOne();
+    res.status(200).json(post);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -105,4 +139,11 @@ const likePost = async (req, res) => {
 };
 
 //* EXPORTER LES FONCTIONS "...Post"
-module.exports = { createPost, getAllPosts, getOnePost, modifyPost, deletePost, likePost };
+module.exports = {
+  createPost,
+  getAllPosts,
+  getOnePost,
+  modifyPost,
+  deletePost,
+  likePost,
+};

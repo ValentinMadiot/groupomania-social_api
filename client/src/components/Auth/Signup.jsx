@@ -92,7 +92,7 @@ const Signup = () => {
         </button>
         <div>
           <p className="authFormText">
-            <Link to="/">Déjà un compte? Connectez-vous !</Link>
+            <Link to="/login">Déjà un compte? Connectez-vous !</Link>
           </p>
         </div>
       </form>

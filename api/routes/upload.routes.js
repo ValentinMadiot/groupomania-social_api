@@ -3,16 +3,27 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer-config");
 
-router.post("/", upload, (req, res) => {
-  try {
+router.post("/", (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.error("❌ Erreur Multer :", err);
+      return res.status(500).json({ error: err.message });
+    }
+
     if (!req.file) {
       return res.status(400).json({ error: "Aucun fichier reçu" });
     }
-    res.status(200).json({ imageUrl: req.file.path });
-  } catch (err) {
-    console.error("Erreur Cloudinary :", err);
-    res.status(500).json({ error: err.message });
-  }
+
+    const env = process.env.NODE_ENV || "development";
+    const imageUrl =
+      env === "production"
+        ? req.file.path
+        : `${req.protocol}://${req.get("host")}/public/images/${
+            req.file.filename
+          }`;
+
+    res.status(200).json({ imageUrl });
+  });
 });
 
 module.exports = router;

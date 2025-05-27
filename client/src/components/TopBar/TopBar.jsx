@@ -6,7 +6,6 @@ import Logo from "../../assets/logos/logo-white.svg";
 import "./topbar.css";
 
 const TopBar = () => {
-
   const { logout } = useLogout();
   const handleLogout = () => {
     logout();
@@ -23,9 +22,19 @@ const TopBar = () => {
   return (
     <header className="topBar">
       <div>
-        <img className="topBarLogo" src={Logo} alt="logo Groupomania" onClick={handleScoll} />
-        <Link to="/">
-          <img className="topBarLogout" src={signOut} alt="Déconnexion" onClick={handleLogout} />
+        <img
+          className="topBarLogo"
+          src={Logo}
+          alt="logo Groupomania"
+          onClick={handleScoll}
+        />
+        <Link to="/login">
+          <img
+            className="topBarLogout"
+            src={signOut}
+            alt="Déconnexion"
+            onClick={handleLogout}
+          />
         </Link>
       </div>
     </header>

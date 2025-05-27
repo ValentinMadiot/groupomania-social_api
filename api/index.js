@@ -15,30 +15,33 @@ const app = express();
 const port = process.env.PORT || 4200;
 
 //* MIDDLEWARE
-app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
 const allowedOrigins = [
+  "http://localhost:3000",
   "http://localhost:4200",
   "https://groupomania-vm.vercel.app",
 ];
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+  origin: function (origin, callback) {
+    const cleanOrigin = origin?.replace(/\/$/, "");
+    if (!origin || allowedOrigins.includes(cleanOrigin)) {
       callback(null, true);
     } else {
+      console.error("⛔ CORS bloqué :", origin);
       callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 };
 
 app.use(cors(corsOptions));
+app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
 app.use(express.json());
 
 //* IMAGES LOCAL
 app.use(express.static("public"));
-app.use("/images", express.static("images"));
+app.use("/public/images", express.static("public/images"));
 
 //* ROUTES
 app.use("/api/auth", authRoutes);

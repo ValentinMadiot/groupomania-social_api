@@ -1,19 +1,38 @@
 //* CLOUDINARY CONFIGUE
 const multer = require("multer");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const { cloudinary } = require("../services/cloudinary");
+const path = require("path");
 
-// Configuration du storage Cloudinary
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "groupomania-social",
-    allowed_formats: ["jpg", "jpeg", "png", "webp"],
-    transformation: [{ width: 800, height: 800, crop: "limit" }],
-  },
-});
+const env = process.env.NODE_ENV || "development";
 
-// Vérification du type MIME
+let storage;
+
+if (env === "production") {
+  // 👉 Cloudinary config
+  const { CloudinaryStorage } = require("multer-storage-cloudinary");
+  const { cloudinary } = require("../services/cloudinary");
+
+  storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+      folder: "groupomania-social",
+      allowed_formats: ["jpg", "jpeg", "png", "webp"],
+      transformation: [{ width: 800, height: 800, crop: "limit" }],
+    },
+  });
+} else {
+  // 👉 Local disk storage pour dev
+  storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, path.join(__dirname, "../public/images"));
+    },
+    filename: (req, file, cb) => {
+      const name = Date.now() + "-" + file.originalname;
+      cb(null, name);
+    },
+  });
+}
+
+// MIME type filter commun
 const fileFilter = (req, file, cb) => {
   const allowedMimeTypes = [
     "image/jpeg",

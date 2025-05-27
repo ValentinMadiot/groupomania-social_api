@@ -4,11 +4,16 @@ import { usePostsContext } from "../../hooks/usePostsContext";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { crossRemove, image, share } from "../../assets/icons";
+import { crossRemove, imgIco, share } from "../../assets/icons";
 import "../PostUpdate/postupdate.css";
 
 function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
   const API_URL = process.env.REACT_APP_API_URL;
+  const PF =
+    process.env.NODE_ENV === "development"
+      ? process.env.REACT_APP_PUBLIC_FOLDER
+      : ""; // Cloudinary met un lien complet directement
+
   const { user: auth } = useAuthContext();
   const { dispatch } = usePostsContext();
 
@@ -35,7 +40,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
       try {
         if (file) {
           const data = new FormData();
-          data.append("image", file); // ✅ important
+          data.append("image", file);
 
           const uploadRes = await fetch(`${API_URL}/api/upload`, {
             method: "POST",
@@ -96,7 +101,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           <div className="postUpdateOptions">
             <label htmlFor={"image"} aria-label="Sélectionner une image">
               <div onClick={() => imageRef.current.click()}>
-                <img src={image} alt="Sélectionner une image" />
+                <img src={imgIco} alt="Sélectionner une image" />
                 Sélectionner une image
               </div>
             </label>
@@ -110,7 +115,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           </div>
           {file && (
             <div className="uploaded-image-update">
-              <img src={URL.createObjectURL(file)} alt="Image du post" />
+              <img src={URL.createObjectURL(file)} alt="Post" />
               <div className="close-icon" onClick={() => setFile(null)}>
                 <img src={crossRemove} alt="Supprimer l'image" />
               </div>
@@ -119,7 +124,10 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
 
           {!file && updatePost.image && (
             <div className="uploaded-image-update">
-              <img src={updatePost.image} alt="Image existante du post" />
+              <img
+                src={updatePost.image}
+                alt="Prévisualisation existante du post"
+              />
               <div
                 className="close-icon"
                 onClick={() => {

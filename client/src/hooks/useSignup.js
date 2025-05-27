@@ -4,6 +4,8 @@ import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
   const API_URL = process.env.REACT_APP_API_URL;
+  console.log(API_URL);
+
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
@@ -33,7 +35,7 @@ export const useSignup = () => {
 
       localStorage.setItem("user", JSON.stringify(json));
       dispatch({ type: "LOGIN", payload: json });
-      navigate("/");
+      navigate("/login");
       setIsLoading(false);
     } catch (err) {
       setError("Erreur de connexion au serveur. Veuillez réessayer plus tard.");

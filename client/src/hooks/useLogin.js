@@ -30,7 +30,7 @@ export const useLogin = () => {
 
       localStorage.setItem("user", JSON.stringify(json));
       dispatch({ type: "LOGIN", payload: json });
-      navigate("/home");
+      navigate("/");
       setIsLoading(false);
     } catch (err) {
       setError("Erreur de connexion au serveur. Veuillez réessayer plus tard.");
