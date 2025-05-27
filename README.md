@@ -1,122 +1,157 @@
-# Groupomania
+<div align="center">  
+  <a href="https://groupomania-vm.vercel.app/signup" target="_blank">  
+    <img src=".docs/preview.png" alt="Aperçu du projet Groupomania">  
+  </a>
+  </br></br>  
+  <h3 align="center">📱 Groupomania - Projet Scolaire</h3>  
+</div>
 
-Septième et dernier projet du parcours "Développeur web" chez OpenClassrooms. L'objectif est de construire un réseau social.
+## <br /> 📌 Sommaire
 
-- [Créez un réseau social d’entreprise](./docs/groupomania_mission.pdf)
+&nbsp;&nbsp;&nbsp; 🎨 &nbsp; [**Introduction**](#introduction)<br />
+&nbsp;&nbsp;&nbsp; 🛠️ &nbsp; [**Technologies**](#technologies)<br />
+&nbsp;&nbsp;&nbsp; 🎯 &nbsp; [**Fonctionnalités**](#fonctionnalités)<br />
+&nbsp;&nbsp;&nbsp; 🚧 &nbsp; [**Mise à Jour & Déploiement**](#upgrade)<br />
+&nbsp;&nbsp;&nbsp; 🚀 &nbsp; [**Installation**](#installation)
 
-- [Cahier des charges](./docs/groupomania_cahier-des-charges.pdf)
+## <br /> <a name="introduction">🎨 Introduction</a>
 
-<!-- - [Aspect visuel du site](./docs/)
+Ce projet consiste en la création d’un **réseau social d’entreprise** pour les employés de Groupomania, avec une interface moderne, un système d’authentification sécurisé et la gestion des publications multimédia.
 
-![screenshot du site](./docs/) -->
+Le projet repose sur une stack **MERN** complète :
 
-<br>
+- **MongoDB** pour la base de données
+- **Express** pour le serveur et les routes API
+- **React** pour l’interface utilisateur
+- **Node.js** pour la logique backend
 
-# Lancement
+Le **backend** expose une **API REST** permettant l’inscription, la connexion (JWT), ainsi que les opérations **CRUD** sur les publications, avec gestion des rôles (utilisateur/admin) et des likes.
 
-## API - Backend
+Le **frontend** React consomme cette API, permet de publier du texte et des images, de modifier ou supprimer ses posts, et de naviguer dans un fil d’actualité responsive.
 
-Prérequis : `Node.js` et `Npm` installés sur votre ordinateur
+Les **images** sont gérées dynamiquement : stockées en local pendant le développement, et sur **Cloudinary** en production pour des performances et une gestion optimales.
 
-- 1 : Installation : Depuis le dossier **api**, écrivez `npm install` dans votre terminal afin d'installer les dépendances. N'oubliez pas de renommer le fichier **.env.sample** en **.env** et de remplir les variables grâce à la note **.txt** des livrables.
+📂 Pour plus de détails, consultez le [dossier](.docs/).
 
-- 2 : Lancement : Une fois les dépendances installées, toujours depuis le dossier **api**, lancez le script `npm start` dans votre terminal. Votre terminal devrait indiquer que le serveur est lancé sur le port 4200 (par défaut).
+## <br /> <a name="technologies">🛠️ Technologies</a>
 
-## Client - Frontend
+### Backend
 
-- 1 : Installation : Depuis le dossier **client**, écrivez `npm install` dans votre terminal afin d'installer les dépendances. N'oubliez pas de renommer le fichier **.env.sample** en **.env** et de remplir les variables grâce à la note **.txt** des livrables.
+- Node.js, Express, MongoDB (Mongoose)
+- Authentification JWT (jsonwebtoken + bcrypt)
+- Upload d’images : `Multer` + `Cloudinary` (prod) ou disque local (dev)
+- Sécurité : Helmet, CORS, password-validator, validator
 
-- 2 : Lancement : Une fois les dépendances installées, toujours depuis le dossier **client**, lancez le script `npm start` dans votre terminal. L'application devrait se lancer sur [localhost port 4200](http://localhost:4200/) (par défaut).
+### Frontend
 
-<br>
+- React, React Router, Context API
+- Formulaires avec feedback utilisateur (erreurs précises côté client et serveur)
+- Responsive design
 
-# Compétences évaluées
+### Déploiement
 
-- Réaliser un premier projet MERN stack complet
-- Authentifier un utilisateur et maintenir sa session (React context, JWT)
-- Implémenter un stockage de données sécurisé en utilisant une base de données (MongoDB)
-- Développer l’interface d’un site web grâce à un framework front-end (React)
+- Render (API) : https://groupomania-social-api.onrender.com
+- Vercel (Frontend) : https://groupomania-vm.vercel.app
 
-<br>
+## <br /> <a name="fonctionnalités">🎯 Fonctionnalités</a>
 
-# Technologies
+- Authentification (JWT) : Inscription, Connexion, Session persistante
+- Création de post : Texte + Image
+- Modification & Suppression d'un post
+- Like unique par utilisateur
+- Nettoyage automatique des images supprimés (sur Cloudinary ou en local)
+- Feedback utilisateur en temps réel (ex: email invalide, mdp faible)
+- Rôle Admin : Suppression & édition de n’importe quel post
+- Détection environnement : `development` ou `production`
 
-- MongoDB (Mongoose)
-- Express (Application)
-- React (front-end library/framework)
-- Node.js
+## <br /> <a name="upgrade">🚧 Mise à Jour</a>
 
-## API
+### Gestion intelligente des images
 
-Bcrypt, Dotenv, Express, Helmet, Jsonwebtoken, Mongoose-unique-validator, Multer, Password-validator, Validator
+- Mode développement : upload local dans `/public/images` avec suppression automatique lors des updates ou deletes
+- Mode production : upload sur Cloudinary (CDN, compression, preview dynamique, nettoyage automatique)
 
-## CLIENT
+### Expérience utilisateur optimisée
 
-Bcrypt, Dotenv, Express, Helmet, Jsonwebtoken, Mongoose-unique-validator, Multer, Password-validator, Validator
+- Messages d’erreur explicites affichés côté backend et frontend
+- Preview dynamique des images lors de la modification d’un post
 
-<br>
+### Architecture claire et maintenable
 
-# Scénario
+- `/api/` → API Express + MongoDB
+- `/client/` → Application React
 
-Vous êtes développeur depuis plus d'un an chez CONNECT-E, une petite agence web
-regroupant une douzaine d'employés.
-Votre directrice, Stéphanie, vient de signer un nouveau contrat avec Groupomania, un groupe
-spécialisé dans la grande distribution, et l'un des plus Kdèles clients de l'agence.
+### Déploiement cloud optimisé
 
-Le projet consiste à construire un réseau social interne pour les employés de Groupomania. Le
-but de cet outil est de faciliter les interactions entre collègues. Le département RH de
-Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges entre collègues.
+- Render pour le backend
+- Vercel pour le frontend
 
-<br>
+## <br /> <a name="installation">🚀 Installation</a>
 
-# Cahier des charges
+### ✅ Pré-requis
 
-## Identité Graphique
+- 🛠️ **[Git](https://git-scm.com/)**
+- 🔧 **[Node.js](https://nodejs.org/fr/)**
+- 📦 **[npm](https://www.npmjs.com/)**
+- 🍃 **[MongoDB](https://www.mongodb.com/)** (Atlas ou local)
 
-- Police d’écriture : tous les textes du site doivent utiliser la police Lato
-- Couleurs : vous êtes libre sur les couleurs
+### 📥 Cloner le projet
 
-## Technique
+```bash
+git clone https://github.com/ValentinMadiot/groupomania-social_api.git
+```
 
-- Respecter les standards WCAG.
-- Mise en place backend / frontend / database.
-- Le projet doit être codé en JavaScript.
-- Obligation d'utiliser un framework front-end (au choix).
-- Choix de la base de données libre (MongoDB, mySQL...).
-- Fournir un README expliquant installation/lancement du projet.
+### 📝 Configuration des variables d’environnement
 
-## Spécifications fonctionnelles
+#### Backend (API)
 
-### Page de connexion
+```bash
+cp api/.env.example api/.env
+```
 
-- Une page de connexion permettant à l’utilisateur de se connecter, ou bien de créer un compte s’il n’en possède pas.
-- La connexion doit se faire à partir de deux éléments : le mail et un mot de passe.
-- Rien de plus à prévoir pour le moment.
+```env
+# PORT
+PORT=4200
 
-### Détails de la fonctionnalité de connexion
+# IDENTIFIANT BASE DE DONNEES (MongoDB)
+MONGODB_URI_DEV=
+MONGODB_URI_PROD=
 
-- Un utilisateur doit avoir la possibilité de se déconnecter.
-- La session de l’utilisateur persiste pendant qu’il est connecté.
-- Les données de connexion doivent être sécurisées.
+# PASSWORD JWT (JSON Web Token)
+JWT_TOKEN=
+JWT_TIME=24h
 
-### Page d’accueil
+# IDENTIFIANT CLOUDINARY (Production Uniquement)
+CLOUD_NAME=
+CLOUD_API_KEY=
+CLOUD_API_SECRET=
+```
 
-- La page d’accueil doit lister les posts créés par les différents utilisateurs.
-- On voudra que les posts soient listés de façon antéchronologique (du plus récent au plus ancien).
+#### Frontend (Client)
 
-### Création d’un post
+```bash
+cp client/.env.example client/.env
+```
 
-- Un utilisateur doit pouvoir créer un post.
-- Un post doit pouvoir contenir du texte et une image.
-- Un utilisateur doit aussi pouvoir modifier et supprimer ses posts.
+```env
+REACT_APP_API_URL=http://localhost:4200
+REACT_APP_PUBLIC_FOLDER=http://localhost:4200/public/images/
+```
 
-### Système de like
+### ▶️ Lancer l’application
 
-- Un utilisateur doit pouvoir liker un post, une seule fois pour chaque post.
+#### Backend (port : 4200)
 
-### Rôle administrateur
+```bash
+cd api
+npm install
+npm start
+```
 
-- Dans le but de pouvoir faire de la modération si nécessaire, il faudra créer un utilisateur “administrateur” ;
-- Celui-ci aura les droits de modification /
-  suppression sur tous les posts du réseau social.
-- Il faudra donc nous communiquer les identifiants de cet administrateur.
+#### Frontend (port : 3000)
+
+```bash
+cd client
+npm install
+npm start
+```
