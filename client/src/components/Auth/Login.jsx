@@ -42,8 +42,8 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      {(customError || error) && (
-        <div className="errorAuth">{customError || error}</div>
+      {(customError || error || "‎") && (
+        <div className="errorAuth">{customError || error || "‎"}</div>
       )}
       <button
         disabled={isLoading}
@@ -53,7 +53,7 @@ const Login = () => {
       </button>
       <div>
         <p className="authFormText">
-          <Link to="/signup">Vous n'avez pas de compte? Inscrivez-vous!</Link>
+          <Link to="/signup">Inscription</Link>
         </p>
       </div>
     </form>

@@ -7,10 +7,9 @@ const Signup = () => {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [customError, setCustomError] = useState("");
 
   const { signup, error, isLoading } = useSignup();
-
-  const [customError, setCustomError] = useState("");
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -84,15 +83,15 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
-        {(customError || error) && (
-          <div className="errorAuth">{customError || error}</div>
+        {(customError || error || "‎") && (
+          <div className="errorAuth">{customError || error || "‎"}</div>
         )}
         <button disabled={isLoading} className="button authFormButton">
           Inscription
         </button>
         <div>
           <p className="authFormText">
-            <Link to="/login">Déjà un compte? Connectez-vous !</Link>
+            <Link to="/login">Connexion</Link>
           </p>
         </div>
       </form>

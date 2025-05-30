@@ -38,13 +38,3 @@ svg {
   -o-user-select: none;
   user-select: none;
 }
-
-.error {
-  background-color: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
-  padding: 8px 12px;
-  border-radius: 4px;
-  margin: 10px 0;
-  font-size: 0.9rem;
-}

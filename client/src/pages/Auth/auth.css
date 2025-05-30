@@ -1,126 +1,181 @@
-.auth {
+.authWrapper {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  min-width: 280px;
-  gap: 7%;
+  background-color: #b5c7de;
+  padding: 1rem;
+  gap: 5rem;
+  flex-wrap: wrap;
 }
 
-.authLogo > img {
-  height: 5rem;
-  padding-bottom: 1rem;
+.flip-card {
+  background-color: transparent;
+  width: 400px;
+  height: 430px;
+  perspective: 1000px;
 }
 
-.authLogo > h2 {
-  font-size: 1rem;
-  font-weight: 400;
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease-in-out;
+  transform-style: preserve-3d;
 }
 
-.authForm {
+.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  min-height: 470px;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  background-color: white;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  box-shadow: var(--shadow);
-  border-radius: 1rem;
-  padding: 1rem;
 }
 
-.signup {
-  gap: 1rem;
+.flip-card-back {
+  transform: rotateY(180deg);
 }
 
-.login {
-  gap: 1rem;
-}
-
-.authForm > h3 {
-  font-size: 1.5rem;
-}
-
-.grid {
-  flex: 1;
-}
-
-.authForm > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  height: 2rem;
+/* Form styling */
+.authForm h3 {
+  font-size: x-large;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .authFormInput {
-  border: none;
-  outline: none;
-  background-color: var(--colorTertiary);
-  border-radius: 8px;
-  padding: 17px;
   width: 100%;
+  padding: 0.9rem;
+  border-radius: 8px;
+  border: none;
+  margin: 0.4rem 0;
+  background-color: #eaeaea;
 }
 
 .authFormButton {
-  width: 7rem;
-  height: 3rem;
-  border-radius: 10px;
-  border: none;
-  background-color: var(--colorPrimary);
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #44445a;
   color: white;
+  font-size: medium;
   font-weight: bold;
+  border: 2px solid #44445a;
+  border-radius: 10px;
+  transition: 0.3s ease;
 }
 
 .authFormButton:hover {
   background-color: white;
-  border: 2px solid var(--colorPrimary);
-  color: var(--colorPrimary);
-  font-weight: bold;
+  border: 2px solid #44445a;
+  color: #44445a;
   cursor: pointer;
 }
 
 .authFormText {
-  padding: 0;
-  border: none;
-  background: var(--colorTertiary);
+  margin-top: 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
   font-weight: 300;
   cursor: pointer;
-  margin-top: -1.5rem;
-  border: none;
-  background-color: white;
+  transition: 0.3s ease;
+}
+
+.authFormText a {
+  text-decoration: none;
 }
 
 .authFormText:hover {
   color: var(--colorPrimary);
 }
 
-.errorAuth {
-  color: red;
-  max-width: 370px;
-  height: 3rem !important;
+.authLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 90vw;
+  margin-bottom: 1rem;
 }
 
-@media screen and (max-width: 990px) {
-  .auth {
-    display: grid;
+.authLogo img {
+  max-width: 100%;
+  height: 4.5rem;
+  object-fit: contain;
+}
+
+.authLogo h2 {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  font-weight: 400;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+  padding: 0 1rem;
+}
+
+/* Error */
+.errorAuth {
+  color: red;
+  height: 1.5rem;
+  margin: 0.5rem 0 1rem 0;
+  font-size: 0.875rem;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+/* Responsive */
+@media screen and (max-width: 1000px) {
+  .authWrapper {
+    flex-direction: column;
+    justify-content: start;
     gap: 1rem;
+  }
+
+  .flip-card {
+    width: 100%;
+    max-width: 370px;
+  }
+
+  .authLogo {
+    margin-bottom: 0;
+  }
+  .authLogo img {
+    max-width: 100%;
     height: auto;
+    width: clamp(300px, 20vw, 400px);
+    object-fit: contain;
+  }
+  .authLogo h2 {
+    max-width: 400px;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .authWrapper {
+    padding: 1rem 0.5rem;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
     padding: 1rem;
   }
+}
 
-  .authLogo > img {
-    height: 3.5rem;
-    width: min-content;
-  }
-
-  .authForm {
-    gap: 1rem;
-  }
-
-  .grid {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    width: 100%;
+@media screen and (max-width: 340px) {
+  .errorAuth {
+    margin: 0rem 0 2rem 0;
   }
 }
