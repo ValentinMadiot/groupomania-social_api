@@ -4,7 +4,7 @@ const LogoAuth = () => {
   return (
     <div className="authLogo">
       <img src={Logo} alt="Groupomania logo" />
-      <h2>Partagez vos scènes cultes entre collègues</h2>
+      <h2>Vos films d’enfance à partager entre collègues</h2>
     </div>
   );
 };
