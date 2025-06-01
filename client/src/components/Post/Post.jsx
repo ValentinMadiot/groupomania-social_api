@@ -18,6 +18,8 @@ const Post = ({ post }) => {
 
   const { dispatch } = usePostsContext();
   const { user: auth } = useAuthContext();
+  const capitalize = (str) =>
+    str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
   const [menuOpened, setMenuOpened] = useState(false);
   const [updatePostModal, setUpdatePostModal] = useState(false);
 
@@ -108,7 +110,7 @@ const Post = ({ post }) => {
           <div>
             <span className="postProfilName">
               {user.firstname && user.lastname
-                ? `${user.firstname} ${user.lastname}`
+                ? `${capitalize(user.firstname)} ${capitalize(user.lastname)}`
                 : user.firstname || user.lastname || ""}
             </span>
             <p className="postProfilDate">
