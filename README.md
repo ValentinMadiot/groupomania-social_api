@@ -11,7 +11,7 @@
 &nbsp;&nbsp;&nbsp; 🎨 &nbsp; [**Introduction**](#introduction)<br />
 &nbsp;&nbsp;&nbsp; 🛠️ &nbsp; [**Technologies**](#technologies)<br />
 &nbsp;&nbsp;&nbsp; 🎯 &nbsp; [**Fonctionnalités**](#fonctionnalités)<br />
-&nbsp;&nbsp;&nbsp; 🚧 &nbsp; [**Mise à Jour & Déploiement**](#upgrade)<br />
+&nbsp;&nbsp;&nbsp; 🚧 &nbsp; [**Mise à Jour**](#upgrade)<br />
 &nbsp;&nbsp;&nbsp; 🚀 &nbsp; [**Installation**](#installation)
 
 ## <br /> <a name="introduction">🎨 Introduction</a>
@@ -105,9 +105,7 @@ git clone https://github.com/ValentinMadiot/groupomania-social_api.git
 
 #### Backend (API)
 
-```bash
-cp api/.env.example api/.env
-```
+Renommer `.env.exemple` en `.env`
 
 ```env
 # PORT
@@ -129,9 +127,7 @@ CLOUD_API_SECRET=
 
 #### Frontend (Client)
 
-```bash
-cp client/.env.example client/.env
-```
+Renommer `.env.exemple` en `.env`
 
 ```env
 REACT_APP_API_URL=http://localhost:4200
