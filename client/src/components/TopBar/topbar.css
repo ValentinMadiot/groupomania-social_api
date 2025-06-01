@@ -12,7 +12,7 @@
   justify-content: space-between;
   padding: 1rem;
   background-color: var(--colorPrimary);
-  color: white;
+  color: var(--colorBase);
   max-width: 100%;
   max-width: 1700px;
   margin: auto;
