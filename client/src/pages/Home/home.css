@@ -1,5 +1,11 @@
 .home {
   min-width: 280px;
+  background-color: var(--colorPrimary);
+  /* background-image: url("./../../assets/images/background.png");
+  background-size: cover;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-position: center; */
 }
 
 .container {

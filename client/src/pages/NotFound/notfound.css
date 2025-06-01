@@ -2,32 +2,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 90vh;
   color: var(--colorPrimary);
-
 }
 
-.notfound div h1{
+.notfound div h1 {
   display: flex;
   justify-content: center;
   font-size: 10rem;
-  color: var(--colorPrimary);
+  color: var(--colorBase);
 }
 
-.notfound div h2{
+.notfound div h2 {
   display: flex;
   justify-content: center;
   font-size: 2rem;
+  color: var(--colorBase);
 }
 
-.notfound div div{
+.notfound div a {
+  text-decoration: none;
+}
+
+.notfound div div {
   display: flex;
   justify-content: center;
-  font-size: 1rem;
-  margin-top: 1rem;
-  border: 2px solid;
+  margin-top: 3rem;
+  border: 1px solid;
   border-radius: 10px;
-  padding: 1rem;
-  background-color: var(--colorPrimary);
-  color: white;
+  padding: 0.8rem;
+  background-color: var(--colorSecondary);
+  color: var(--colorBase);
+  transition: 0.3s ease;
+}
+
+.notfound div div:hover {
+  background-color: var(--colorBase);
+  color: var(--colorPrimary);
+  border: 1px solid var(--colorSecondary);
+  cursor: pointer;
 }

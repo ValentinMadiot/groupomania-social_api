@@ -1,8 +1,8 @@
 import { useLocation } from "react-router-dom";
+import Login from "../../components/Auth/Login";
 import LogoAuth from "../../components/Auth/LogoAuth";
+import Signup from "../../components/Auth/Signup";
 import "./../../pages/Auth/auth.css";
-import Login from "./Login";
-import Signup from "./Signup";
 
 const AuthContainer = () => {
   const location = useLocation();

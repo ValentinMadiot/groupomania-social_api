@@ -1,10 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
 
 :root {
-  --colorPrimary: #4e5166;
-  --colorSecondary: #b0c4de;
-  --colorTertiary: #ececed;
-  --shadow: 0px 4px 17px 2px rgba(0, 0, 0, 0.25);
+  /* --colorPrimary: #4e5166; */
+  --colorPrimary: #0b0c27; /* Bleu nuit profond */
+  /* --colorSecondary: #b0c4de; */
+  --colorSecondary: #1c1f3a; /* Bleu-gris foncé */
+  --colorTertiary: #2b2c44; /* Indigo désaturé */
+  --colorBase: #ededed; /* Blanc doux */
+  --colorBase-2: #cccccc;
+  /* --colorBase-3: #444; */
+  --colorBase-3: #5c7aab;
+  --shadow: 0px 4px 17px 2px rgba(255, 255, 255, 0.15);
 }
 
 *,
@@ -14,17 +20,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 1px solid red;  TEST */
+  /* border: 1px solid red; */
 }
 
 html {
-  background-color: var(--colorSecondary);
+  background-color: var(--colorPrimary);
+  /* background-image: url("./assets/images/background.png"); 
+  background-size: cover;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-position: center; */
 }
 
 button {
   padding: 0;
   border: none;
-  background: var(--colorTertiary);
+  background: var(--colorSecondary);
 }
 
 a {

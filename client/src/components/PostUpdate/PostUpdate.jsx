@@ -99,10 +99,10 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
             </button>
           </div>
           <div className="postUpdateOptions">
-            <label htmlFor={"image"} aria-label="Sélectionner une image">
+            <label htmlFor={"image"} aria-label="Remplace ton image">
               <div onClick={() => imageRef.current.click()}>
-                <img src={imgIco} alt="Sélectionner une image" />
-                Sélectionner une image
+                <img src={imgIco} alt="Remplace ton image" />
+                Remplace ton image
               </div>
             </label>
             <input

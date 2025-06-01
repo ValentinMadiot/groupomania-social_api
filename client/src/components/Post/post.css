@@ -1,9 +1,10 @@
 .post {
-  background: var(--colorTertiary);
+  background: var(--colorSecondary);
   padding: 1rem;
-  margin: 2rem 20%;
+  margin: 2rem auto;
+  max-width: 740px;
   border-radius: 1rem;
-  box-shadow: var(--shadow);
+  /* box-shadow: var(--shadow); */
 }
 
 .postProfil {
@@ -27,20 +28,24 @@
 
 .postProfilName {
   font-weight: bold;
+  color: var(--colorBase);
 }
 
 .postProfilDate {
   font-size: 0.8rem;
+  color: var(--colorBase);
 }
 
 .postProfilOption {
   cursor: pointer;
   border: none;
   background-color: transparent;
+  color: var(--colorBase);
 }
 
 .postProfilDesc {
-  padding-top: 1rem;
+  padding: 1rem 0 1rem 0;
+  color: var(--colorBase);
 }
 
 .postContents {
@@ -51,11 +56,13 @@
 .postImg {
   align-self: center;
   max-width: 100%;
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
+  padding-bottom: 1rem;
   max-height: 70vh;
 }
 
-.postLike  {
+.postLike {
+  color: var(--colorBase);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -72,5 +79,11 @@
 @media screen and (max-width: 990px) {
   .post {
     margin: 2rem 10%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .post {
+    margin: 3% 3%;
   }
 }

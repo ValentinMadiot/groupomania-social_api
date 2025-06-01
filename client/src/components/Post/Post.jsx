@@ -1,15 +1,11 @@
+import { MantineProvider, Menu } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { IconMenuDeep } from "@tabler/icons-react";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import { likeEmpty, likeIcon, userDefault } from "../../assets/icons";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostsContext } from "../../hooks/usePostsContext";
-
-import {
-  edit,
-  likeEmpty,
-  likeIcon,
-  trash,
-  userDefault,
-} from "../../assets/icons";
 import PostUpdateModal from "../PostUpdate/PostUpdate";
 import "./post.css";
 
@@ -22,6 +18,7 @@ const Post = ({ post }) => {
 
   const { dispatch } = usePostsContext();
   const { user: auth } = useAuthContext();
+  const [menuOpened, setMenuOpened] = useState(false);
   const [updatePostModal, setUpdatePostModal] = useState(false);
 
   //* DETAILS USER POST
@@ -121,22 +118,40 @@ const Post = ({ post }) => {
             </p>
           </div>
         </div>
-        {auth.user.admin || auth.user._id === post.userId ? (
-          <div>
-            <img src={edit} alt="edit" onClick={handleUpdate} className="ico" />
+        {(auth.user.admin || auth.user._id === post.userId) && (
+          <MantineProvider withGlobalStyles withNormalizeCSS>
+            <Menu
+              position="bottom-end"
+              offset={6}
+              withArrow
+              shadow="md"
+              width={150}
+              opened={menuOpened}
+              onChange={setMenuOpened}>
+              <Menu.Target>
+                <button
+                  className="postProfilOption"
+                  onClick={() => setMenuOpened((o) => !o)}>
+                  <IconMenuDeep />
+                </button>
+              </Menu.Target>
+
+              <Menu.Dropdown>
+                <Menu.Label>Options</Menu.Label>
+                <Menu.Item onClick={handleUpdate}>Modifier</Menu.Item>
+                <Menu.Item color="#9D080A" onClick={handleDelete}>
+                  Supprimer
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+
             <PostUpdateModal
               updatePostModal={updatePostModal}
               setUpdatePostModal={setUpdatePostModal}
               data={post}
             />
-            <img
-              src={trash}
-              alt="delete"
-              onClick={handleDelete}
-              className="ico"
-            />
-          </div>
-        ) : null}
+          </MantineProvider>
+        )}
       </div>
       <div className="postContents">
         <div className="postProfilDesc">{post.desc}</div>
@@ -153,7 +168,7 @@ const Post = ({ post }) => {
           src={liked ? likeIcon : likeEmpty}
           alt={liked ? "Je n'aime plus" : "J'aime"}
         />{" "}
-        {like} likes
+        {like}
       </div>
     </section>
   );

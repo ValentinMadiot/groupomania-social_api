@@ -1,9 +1,10 @@
 .postShare {
-  background: var(--colorTertiary);
+  background: var(--colorSecondary);
   padding: 1rem;
-  margin: 1rem 20%;
+  margin: 1rem auto;
+  max-width: 740px;
   border-radius: 1rem;
-  box-shadow: var(--shadow);
+  /* box-shadow: var(--shadow); */
 }
 
 .postShare > form > div {
@@ -21,14 +22,23 @@
   outline: none;
   text-overflow: ellipsis;
   overflow: hidden;
+  border: 1px solid var(--colorBase-3);
+  background-color: var(--colorTertiary);
+  color: var(--colorBase);
+}
+
+.postShare > form > div > input::placeholder {
+  color: var(--colorBase-2);
 }
 
 .postShareButton {
+  background: var(--colorSecondary);
   padding-left: 1rem;
   cursor: pointer;
 }
 
 .postShareOptions {
+  color: var(--colorBase);
   width: 100%;
   padding: 1rem 1rem 0 1%;
   justify-content: start !important;
@@ -59,13 +69,9 @@
   border-radius: 0.5rem;
 }
 
-.close-icon {
+.close-icon img {
   position: absolute;
-  top: 1%;
-  background-color: var(--primary-500);
-  height: 30px;
-  aspect-ratio: 1;
-  border-radius: 50%;
+  top: 10px;
   display: grid;
   place-content: center;
   cursor: pointer;
@@ -75,7 +81,7 @@ input.error {
   border: 1px solid #e7195a;
 }
 
-.error{
+.error {
   padding-top: 1rem;
   color: red;
 }
@@ -86,5 +92,11 @@ input.error {
   }
   .postShareOptions {
     margin-left: 2%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .postShare {
+    margin: 0rem 3%;
   }
 }

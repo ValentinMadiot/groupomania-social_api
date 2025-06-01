@@ -7,7 +7,7 @@
   max-width: 1700px;
   padding: 2rem;
   border-radius: 1rem;
-  background: var(--colorTertiary);
+  background: var(--colorSecondary);
   box-shadow: var(--shadow);
 }
 
@@ -26,6 +26,13 @@
   outline: none;
   text-overflow: ellipsis;
   overflow: hidden;
+  background-color: var(--colorTertiary);
+  border: 1px solid var(--colorBase-3);
+  color: var(--colorBase);
+}
+
+.postUpdate > form > div > input::placeholder {
+  color: var(--colorBase-2);
 }
 
 .postUpdateButton {
@@ -43,6 +50,7 @@
   align-items: center;
   cursor: pointer;
   gap: 0.5rem;
+  color: var(--colorBase);
 }
 
 .postUpdateOption {
@@ -79,7 +87,7 @@ input.error {
   border: 1px solid #e7195a;
 }
 
-.error{
+.error {
   padding-top: 1rem;
   color: red;
 }

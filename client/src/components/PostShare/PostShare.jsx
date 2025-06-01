@@ -91,10 +91,10 @@ const PostShare = () => {
         <div>
           <input
             type="text"
-            placeholder="Partage tes expériences ici"
+            placeholder="Ton film culte d’enfance"
+            aria-label="Ton film culte d’enfance"
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
-            aria-label="Partage tes expériences ici"
           />
           <button type="submit" aria-label="Soumettre">
             <img className="postShareButton" src={share} alt="Partager" />
@@ -123,6 +123,7 @@ const PostShare = () => {
             />
             <div className="close-icon" onClick={() => setFile(null)}>
               <img src={crossRemove} alt="Supprimer l'image" />
+              {/* <img src={trash} alt="Supprimer l'image" /> */}
             </div>
           </div>
         )}

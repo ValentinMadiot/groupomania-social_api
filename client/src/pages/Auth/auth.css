@@ -2,8 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #b5c7de;
+  height: 85vh;
+  background-color: var(--colorPrimary);
+  /* background-color: #b5c7de; */
   padding: 1rem;
   gap: 5rem;
   flex-wrap: wrap;
@@ -32,12 +33,12 @@
 .flip-card-back {
   position: absolute;
   width: 100%;
-  min-height: 470px;
+  min-height: 526px;
   height: 100%;
   backface-visibility: hidden;
   border-radius: 1rem;
-  box-shadow: var(--shadow);
-  background-color: white;
+  /* box-shadow: var(--shadow); */
+  background-color: var(--colorSecondary);
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -54,33 +55,42 @@
   font-size: x-large;
   text-align: center;
   margin-bottom: 1rem;
+  color: var(--colorBase);
 }
 
 .authFormInput {
   width: 100%;
   padding: 0.9rem;
-  border-radius: 8px;
-  border: none;
+  border-radius: 10px;
+  /* border: none; */
+  border: 1px solid var(--colorBase-3);
   margin: 0.4rem 0;
-  background-color: #eaeaea;
+  /* background-color: #eaeaea; */
+  background-color: var(--colorTertiary);
+  color: var(--colorBase);
+}
+
+.authFormInput::placeholder {
+  color: var(--colorBase-2);
 }
 
 .authFormButton {
   width: 100%;
   padding: 0.8rem;
-  background-color: #44445a;
-  color: white;
+  /* background-color: #44445a; */
+  background-color: var(--colorPrimary);
+  color: var(--colorBase);
   font-size: medium;
   font-weight: bold;
-  border: 2px solid #44445a;
+  /* border: 1px solid var(--colorBase-3); */
   border-radius: 10px;
   transition: 0.3s ease;
 }
 
 .authFormButton:hover {
-  background-color: white;
-  border: 2px solid #44445a;
-  color: #44445a;
+  background-color: var(--colorBase);
+  /* border: 1px solid var(--colorTertiary); */
+  color: var(--colorTertiary);
   cursor: pointer;
 }
 
@@ -88,10 +98,10 @@
   margin-top: 1rem;
   text-align: center;
   text-decoration: none;
-  color: #000;
-  font-weight: 300;
+  font-weight: 400;
   cursor: pointer;
   transition: 0.3s ease;
+  color: var(--colorBase);
 }
 
 .authFormText a {
@@ -99,7 +109,7 @@
 }
 
 .authFormText:hover {
-  color: var(--colorPrimary);
+  color: var(--colorBase-2);
 }
 
 .authLogo {
@@ -118,6 +128,7 @@
 }
 
 .authLogo h2 {
+  color: var(--colorBase);
   font-size: clamp(0.9rem, 2vw, 1.2rem);
   font-weight: 400;
   margin-top: 0.5rem;
@@ -127,9 +138,9 @@
 
 /* Error */
 .errorAuth {
-  color: red;
+  color: rgb(255, 47, 47);
   height: 1.5rem;
-  margin: 0.5rem 0 1rem 0;
+  margin: 0.5rem 0 1.5rem 0;
   font-size: 0.875rem;
   text-align: center;
   transition: opacity 0.3s ease;

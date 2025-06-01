@@ -1,4 +1,4 @@
-import Logo from "../../assets/logos/logo-black.svg";
+import Logo from "../../assets/logos/logo-white.svg";
 
 const LogoAuth = () => {
   return (
