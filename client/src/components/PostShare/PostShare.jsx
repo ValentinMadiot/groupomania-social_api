@@ -91,8 +91,8 @@ const PostShare = () => {
         <div>
           <input
             type="text"
-            placeholder="Ton film culte d’enfance"
-            aria-label="Ton film culte d’enfance"
+            placeholder="Le titre du film"
+            aria-label="Le titre du film"
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
           />
