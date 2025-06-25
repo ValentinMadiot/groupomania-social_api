@@ -38,7 +38,7 @@ const Post = ({ post }) => {
       setUser(json);
     };
     fetchUser();
-  }, [post.userId, auth.token]);
+  }, [post.userId, auth.token, API_URL]);
 
   //* UPDATE POST
   const handleUpdate = () => {

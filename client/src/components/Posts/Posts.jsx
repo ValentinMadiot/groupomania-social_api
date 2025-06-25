@@ -23,7 +23,7 @@ const Posts = () => {
     if (user) {
       fetchPosts();
     }
-  }, [user, dispatch]);
+  }, [user, dispatch, API_URL]);
 
   return (
     <section>
