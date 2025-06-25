@@ -24,12 +24,12 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="home">
+    <main className="home" id="home">
       <TopBar />
       <div className="container">
         <PostShare />
         <Posts />
-        <a href="#" className="scrollup" id="scroll-up">
+        <a href="#home" className="scrollup" id="scroll-up">
           <IconChevronUp stroke={2} />
         </a>
       </div>

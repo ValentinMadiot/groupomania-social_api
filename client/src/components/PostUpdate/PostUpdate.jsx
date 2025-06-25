@@ -9,10 +9,10 @@ import "../PostUpdate/postupdate.css";
 
 function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
   const API_URL = process.env.REACT_APP_API_URL;
-  const PF =
-    process.env.NODE_ENV === "development"
-      ? process.env.REACT_APP_PUBLIC_FOLDER
-      : ""; // Cloudinary met un lien complet directement
+  // const PF =
+  //   process.env.NODE_ENV === "development"
+  //     ? process.env.REACT_APP_PUBLIC_FOLDER
+  //     : ""; // Cloudinary met un lien complet directement
 
   const { user: auth } = useAuthContext();
   const { dispatch } = usePostsContext();
@@ -101,7 +101,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           <div className="postUpdateOptions">
             <label htmlFor={"image"} aria-label="Remplace ton image">
               <div onClick={() => imageRef.current.click()}>
-                <img src={imgIco} alt="Remplace ton image" />
+                <img src={imgIco} alt="Sauce Piquante" />
                 Remplace ton image
               </div>
             </label>

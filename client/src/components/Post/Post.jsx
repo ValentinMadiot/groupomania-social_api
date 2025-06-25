@@ -105,7 +105,7 @@ const Post = ({ post }) => {
           <img
             className="postProfilImg"
             src={userDefault}
-            alt="photo de profil par défaut"
+            alt="profil par défaut"
           />
           <div>
             <span className="postProfilName">

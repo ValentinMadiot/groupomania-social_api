@@ -16,22 +16,13 @@
 
 ## <br /> <a name="introduction">🎨 Introduction</a>
 
-Ce projet consiste en la création d’un **réseau social d’entreprise** pour les employés de Groupomania, avec une interface moderne, un système d’authentification sécurisé et la gestion des publications multimédia.
+Groupomania est un réseau social d’entreprise complet développé en stack **MERN** (**MongoDB**, **Express**, **React**, **Node.js**).
 
-Le projet repose sur une stack **MERN** complète :
+Les employés peuvent publier du contenu texte ou image, liker des posts, et interagir dans un fil d’actualité sécurisé et responsive.
 
-- **MongoDB** pour la base de données
-- **Express** pour le serveur et les routes API
-- **React** pour l’interface utilisateur
-- **Node.js** pour la logique backend
+L’authentification est sécurisée par **JWT**, la gestion d’images est assurée localement en développement, ou via **Cloudinary** en production.
 
-Le **backend** expose une **API REST** permettant l’inscription, la connexion (JWT), ainsi que les opérations **CRUD** sur les publications, avec gestion des rôles (utilisateur/admin) et des likes.
-
-Le **frontend** React consomme cette API, permet de publier du texte et des images, de modifier ou supprimer ses posts, et de naviguer dans un fil d’actualité responsive.
-
-Les **images** sont gérées dynamiquement : stockées en local pendant le développement, et sur **Cloudinary** en production pour des performances et une gestion optimales.
-
-📂 Pour plus de détails, consultez le [dossier](.docs/).
+> 📂 Pour plus de détails, consultez le [dossier](.docs/).
 
 ## <br /> <a name="technologies">🛠️ Technologies</a>
 
@@ -39,104 +30,125 @@ Les **images** sont gérées dynamiquement : stockées en local pendant le déve
 
 - Node.js, Express, MongoDB (Mongoose)
 - Authentification JWT (jsonwebtoken + bcrypt)
-- Upload d’images : `Multer` + `Cloudinary` (prod) ou disque local (dev)
+- Upload d’images : Multer (local) ou Cloudinary (prod)
 - Sécurité : Helmet, CORS, password-validator, validator
 
 ### Frontend
 
 - React, React Router, Context API
-- Formulaires avec feedback utilisateur (erreurs précises côté client et serveur)
-- Responsive design
+- Formulaires avec feedback utilisateur
+- Responsive Design
 
 ### Déploiement
 
-- Render (API) : https://groupomania-social-api.onrender.com
-- Vercel (Frontend) : https://groupomania-vm.vercel.app
+- API : [**Render**](https://groupomania-social-api.onrender.com)
+- UI : [**Vercel**](https://groupomania-vm.vercel.app)
+- Media : [**Cloudinary**](https://console.cloudinary.com/)
 
 ## <br /> <a name="fonctionnalités">🎯 Fonctionnalités</a>
 
 - Authentification (JWT) : Inscription, Connexion, Session persistante
-- Création de post : Texte + Image
-- Modification & Suppression d'un post
-- Like unique par utilisateur
-- Nettoyage automatique des images supprimés (sur Cloudinary ou en local)
-- Feedback utilisateur en temps réel (ex: email invalide, mdp faible)
-- Rôle Admin : Suppression & édition de n’importe quel post
-- Détection environnement : `development` ou `production`
+- Création, modification et suppression de posts
+- Upload d’images avec prévisualisation dynamique
+- Système de likes unique par utilisateur
+- Nettoyage automatique des images supprimés sur Cloudinary ou en local
+- Rôle administrateur : modération des publications
+- Détection environnement : development ou production
+- Feedback utilisateur clair : email invalide, mdp faible, etc...
 
 ## <br /> <a name="upgrade">🚧 Mise à Jour</a>
 
-### Gestion intelligente des images
-
-- Mode développement : upload local dans `/public/images` avec suppression automatique lors des updates ou deletes
-- Mode production : upload sur Cloudinary (CDN, compression, preview dynamique, nettoyage automatique)
-
-### Expérience utilisateur optimisée
-
-- Messages d’erreur explicites affichés côté backend et frontend
-- Preview dynamique des images lors de la modification d’un post
-
-### Architecture claire et maintenable
-
-- `/api/` → API Express + MongoDB
-- `/client/` → Application React
-
-### Déploiement cloud optimisé
-
-- Render pour le backend
-- Vercel pour le frontend
+- Gestion intelligente des images (Cloudinary ou stockage local)
+- Refonte UI/UX : affichage des erreurs, preview image, accessibilité
+- Refactor : structure `api/` (backend) et `client/` (frontend)
+- Déploiement performant via [**Render**](https://groupomania-social-api.onrender.com) (API) & [**Vercel**](https://groupomania-vm.vercel.app) (UI)
 
 ## <br /> <a name="installation">🚀 Installation</a>
 
-### ✅ Pré-requis
+### ✅ Prérequis
 
-- 🛠️ **[Git](https://git-scm.com/)**
-- 🔧 **[Node.js](https://nodejs.org/fr/)**
-- 📦 **[npm](https://www.npmjs.com/)**
-- 🍃 **[MongoDB](https://www.mongodb.com/)** (Atlas ou local)
+- [Git](https://git-scm.com/) &nbsp;—&nbsp; Système de gestion de versions
+- [Node.js](https://nodejs.org/fr) &nbsp;—&nbsp; Exécuteur local de scripts JavaScript
+- [npm](https://www.npmjs.com/) &nbsp;—&nbsp; Gestionnaire de paquets JavaScript
+- [MongoDB](https://www.mongodb.com/) — Base de données NoSQL
+- [Google Chrome](https://www.google.com/) &nbsp;—&nbsp; Navigateur moderne
+- [Visual Studio Code](https://code.visualstudio.com/) &nbsp;—&nbsp; Éditeur de code
+- [Render](https://render.com/) &nbsp;—&nbsp; Déploiement de l’API en production
+- [Cloudinary](https://cloudinary.com/) &nbsp;—&nbsp; Hébergement et optimisation des images
+- [Vercel](https://vercel.com/home) &nbsp;—&nbsp; Déploiement du frontend en production
 
 ### 📥 Cloner le projet
 
 ```bash
-git clone https://github.com/ValentinMadiot/groupomania-social_api.git
+git clone https://github.com/ValentinMadiot/groupomania-social_api
+cd groupomania-social_api
 ```
 
-### 📝 Configuration des variables d’environnement
+### 📝 Configuration de l'environnement
 
-#### Backend (API)
+#### 1. DEVELOPPEMENT (Local)
 
-Renommer `.env.exemple` en `.env`
+Renommer `.env.exemple` en `.env` dans `./api`
 
-```env
+Ajoutez les variables d’environnement dans le fichier `.env` :
+
+```bash
 # PORT
-PORT=4200
+PORT=8080
 
 # IDENTIFIANT BASE DE DONNEES (MongoDB)
-MONGODB_URI_DEV=
-MONGODB_URI_PROD=
+MONGODB_URI_DEV=mongodb://localhost:27017/groupomania
 
 # PASSWORD JWT (JSON Web Token)
-JWT_TOKEN=
+JWT_TOKEN=secret_token
+JWT_TIME=24h
+```
+
+Renommer `.env.exemple` en `.env` dans `./client`
+
+Ajoutez les variables d’environnement dans le fichier `.env` :
+
+```bash
+# API ENDPOINT
+REACT_APP_API_URL=http://localhost:8080
+
+# PUBLIC IMAGES PATH
+REACT_APP_PUBLIC_FOLDER=http://localhost:8080/public/images/
+```
+
+#### 2.1 PRODUCTION (Render)
+
+Ajoutez les variables d’environnement sur Render :
+
+```bash
+# PORT
+PORT=8080
+
+# IDENTIFIANT BASE DE DONNEES (MongoDB)
+MONGODB_URI_PROD=mongodb+srv://<username>:<password>@cluster0.mongodb.net/myDatabase?retryWrites=true&w=majority
+
+# PASSWORD JWT (JSON Web Token)
+JWT_TOKEN=secret_token
 JWT_TIME=24h
 
-# IDENTIFIANT CLOUDINARY (Production Uniquement)
-CLOUD_NAME=
-CLOUD_API_KEY=
-CLOUD_API_SECRET=
+# IDENTIFIANT CLOUDINARY
+CLOUD_API_KEY=clef_api
+CLOUD_API_SECRET=api_secrete
+CLOUD_NAME=nom_du_stockage
 ```
 
-#### Frontend (Client)
+#### 2.2 FRONTEND (Vercel)
 
-Renommer `.env.exemple` en `.env`
+Ajoutez les variables d’environnement sur Vercel :
 
-```env
-REACT_APP_API_URL=http://localhost:4200
-REACT_APP_PUBLIC_FOLDER=http://localhost:4200/public/images/
+```bash
+# URL RENDER
+REACT_APP_API_URL=https://nom_projet.onrender.com
 ```
 
-### ▶️ Lancer l’application
+### ▶️ Lancer le projet
 
-#### Backend (port : 4200)
+#### Backend
 
 ```bash
 cd api
@@ -144,10 +156,14 @@ npm install
 npm start
 ```
 
-#### Frontend (port : 3000)
+Backend disponible sur : `http://localhost:8080`
+
+#### Frontend
 
 ```bash
 cd client
 npm install
 npm start
 ```
+
+Frontend disponible sur : `http://localhost:3000`

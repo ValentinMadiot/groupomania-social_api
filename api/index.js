@@ -12,12 +12,12 @@ const uploadRoute = require("./routes/upload.routes");
 
 //* APP
 const app = express();
-const port = process.env.PORT || 4200;
+const port = process.env.PORT || 8080;
 
 //* MIDDLEWARE
 const allowedOrigins = [
   "http://localhost:3000",
-  "http://localhost:4200",
+  "http://localhost:8080",
   "https://groupomania-vm.vercel.app",
 ];
 
@@ -44,10 +44,10 @@ app.use(express.static("public"));
 app.use("/public/images", express.static("public/images"));
 
 //* ROUTES
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/posts", postRoutes);
-app.use("/api/upload", uploadRoute);
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
+app.use("/upload", uploadRoute);
 
 //* LANCEMENT SUR LE PORT
 app.listen(port, () => console.log("Listening on port : " + port));
