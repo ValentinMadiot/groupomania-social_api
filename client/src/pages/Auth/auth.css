@@ -1,19 +1,19 @@
 .authWrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
-  height: 85vh;
+  gap: 1rem;
+  min-height: 100dvh;
+  padding: 1rem 0.5rem;
   background-color: var(--colorPrimary);
-  /* background-color: #b5c7de; */
-  padding: 1rem;
-  gap: 5rem;
-  flex-wrap: wrap;
 }
 
 .flip-card {
   background-color: transparent;
-  width: 400px;
-  height: 430px;
+  width: 100%;
+  max-width: 370px;
+  height: 100%;
   perspective: 1000px;
 }
 
@@ -37,9 +37,8 @@
   height: 100%;
   backface-visibility: hidden;
   border-radius: 1rem;
-  /* box-shadow: var(--shadow); */
   background-color: var(--colorSecondary);
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,7 +49,6 @@
   transform: rotateY(180deg);
 }
 
-/* Form styling */
 .authForm h3 {
   font-size: x-large;
   text-align: center;
@@ -62,10 +60,8 @@
   width: 100%;
   padding: 0.9rem;
   border-radius: 10px;
-  /* border: none; */
   border: 1px solid var(--colorBase-3);
   margin: 0.4rem 0;
-  /* background-color: #eaeaea; */
   background-color: var(--colorTertiary);
   color: var(--colorBase);
 }
@@ -77,19 +73,16 @@
 .authFormButton {
   width: 100%;
   padding: 0.8rem;
-  /* background-color: #44445a; */
   background-color: var(--colorPrimary);
   color: var(--colorBase);
   font-size: medium;
   font-weight: bold;
-  /* border: 1px solid var(--colorBase-3); */
   border-radius: 10px;
   transition: 0.3s ease;
 }
 
 .authFormButton:hover {
   background-color: var(--colorBase);
-  /* border: 1px solid var(--colorTertiary); */
   color: var(--colorTertiary);
   cursor: pointer;
 }
@@ -118,12 +111,13 @@
   align-items: center;
   text-align: center;
   max-width: 90vw;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .authLogo img {
   max-width: 100%;
-  height: 4.5rem;
+  width: clamp(300px, 80vw, 400px);
+  height: auto;
   object-fit: contain;
 }
 
@@ -133,60 +127,44 @@
   font-weight: 400;
   margin-top: 0.5rem;
   line-height: 1.4;
-  padding: 0 1rem;
+  padding: 0;
+  max-width: 400px;
 }
 
-/* Error */
 .errorAuth {
   color: rgb(255, 47, 47);
   height: 1.5rem;
-  margin: 0.5rem 0 1.5rem 0;
+  margin: 0.5rem 0 2rem 0;
   font-size: 0.875rem;
   text-align: center;
   transition: opacity 0.3s ease;
 }
 
-/* Responsive */
-@media screen and (max-width: 1000px) {
+@media screen and (min-width: 1000px) {
   .authWrapper {
-    flex-direction: column;
-    justify-content: start;
-    gap: 1rem;
-  }
-
-  .flip-card {
-    width: 100%;
-    max-width: 370px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+    padding-bottom: 8rem;
+    height: 85vh;
   }
 
   .authLogo {
-    margin-bottom: 0;
+    margin-bottom: 1rem;
   }
-  .authLogo img {
-    max-width: 100%;
-    height: auto;
-    width: clamp(300px, 20vw, 400px);
-    object-fit: contain;
-  }
-  .authLogo h2 {
-    max-width: 400px;
-    padding: 0;
-  }
-}
 
-@media screen and (max-width: 400px) {
-  .authWrapper {
-    padding: 1rem 0.5rem;
+  .authLogo img {
+    height: 4.5rem;
+    width: auto;
+  }
+
+  .flip-card {
+    min-width: 400px;
+    height: 430px;
   }
 
   .flip-card-front,
   .flip-card-back {
-    padding: 1rem;
-  }
-}
-
-@media screen and (max-width: 340px) {
-  .errorAuth {
-    margin: 0rem 0 2rem 0;
+    padding: 2rem;
   }
 }
