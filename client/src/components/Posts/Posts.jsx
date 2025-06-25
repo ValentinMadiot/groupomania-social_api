@@ -10,7 +10,7 @@ const Posts = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`${API_URL}/api/posts`, {
+      const response = await fetch(`${API_URL}/posts`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

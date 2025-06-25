@@ -42,7 +42,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           const data = new FormData();
           data.append("image", file);
 
-          const uploadRes = await fetch(`${API_URL}/api/upload`, {
+          const uploadRes = await fetch(`${API_URL}/upload`, {
             method: "POST",
             headers: {
               Authorization: `Bearer ${auth.token}`,
@@ -60,7 +60,7 @@ function PostUpdateModal({ updatePostModal, setUpdatePostModal, data }) {
           }
         }
 
-        const response = await fetch(`${API_URL}/api/posts/${updatePost._id}`, {
+        const response = await fetch(`${API_URL}/posts/${updatePost._id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

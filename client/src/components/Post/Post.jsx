@@ -27,7 +27,7 @@ const Post = ({ post }) => {
   const [user, setUser] = useState({});
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch(`${API_URL}/api/users/${post.userId}`, {
+      const response = await fetch(`${API_URL}/users/${post.userId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const Post = ({ post }) => {
     };
     try {
       if (auth.user.admin || auth.user._id === post.userId) {
-        const deleteRes = await fetch(`${API_URL}/api/posts/${post._id}`, {
+        const deleteRes = await fetch(`${API_URL}/posts/${post._id}`, {
           method: "DELETE",
           body: JSON.stringify(deleteReq),
           headers: {
@@ -83,7 +83,7 @@ const Post = ({ post }) => {
     const likeReq = {
       userId: auth.user._id,
     };
-    const likeRes = await fetch(`${API_URL}/api/posts/` + post._id + "/like", {
+    const likeRes = await fetch(`${API_URL}/posts/` + post._id + "/like", {
       method: "POST",
       body: JSON.stringify(likeReq),
       headers: {

@@ -43,7 +43,7 @@ const PostShare = () => {
       const data = new FormData();
       data.append("image", file); // ✅ important
       try {
-        const uploadRes = await fetch(`${API_URL}/api/upload`, {
+        const uploadRes = await fetch(`${API_URL}/upload`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
@@ -66,7 +66,7 @@ const PostShare = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/api/posts`, {
+      const response = await fetch(`${API_URL}/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
